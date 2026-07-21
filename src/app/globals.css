@@ -49,7 +49,7 @@
 }
 
 body {
-  /* background: var(--background); */
+  background-color: "white" !important;
   /* color: var(--foreground); */
   /* Uses Montserrat globally as the primary typography style */
   /* font-family: var(--font-sans); */
