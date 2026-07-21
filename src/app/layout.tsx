@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="flex-1 w-full">{children}</main>
         <Footer />
-        {/* <ThumbNav /> */}
+        <ThumbNav />
         <PopupCard />
       </body>
     </html>
