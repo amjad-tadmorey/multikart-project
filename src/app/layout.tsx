@@ -19,14 +19,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={assignmentMontserrat.variable}>
+    // FIX: Added className="light" and style={{ colorScheme: "light" }}
+    <html lang="en" className={`${assignmentMontserrat.variable} light`} style={{ colorScheme: "light" }}>
       <body className="flex min-h-screen flex-col bg-slate-50 pb-16 md:pb-0">
         <Header />
         <main className="flex-1 w-full">{children}</main>
         <Footer />
 
         <ThumbNav />
-        {/* Renders safely outside layout bounding flow structures a*/}
         <PopupCard />
       </body>
     </html>

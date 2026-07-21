@@ -1,20 +1,31 @@
 @import "tailwindcss";
 
-/* Force Tailwind v4 to ignore system dark mode settings */
-@variant dark (&:where(.disable-dark-mode-safeguard));
+/* FIX: Tell Tailwind v4 to look for a manual .dark class instead of system settings */
+@theme {
+  --variant-dark: .dark &;
+}
 
 :root {
-  /* Fix: Set foreground to a dark charcoal color so text is visible */
-  --background: #ffffff;
-  --foreground: #1e293b;
+  --background: #f8fafc;
+  /* Matches your body's bg-slate-50 */
+  --foreground: #0f172a;
+  /* Matches slate-900 */
 
-  /* Brand Kit Token Declarations (Permanently Fixed to Light Mode) */
+  /* Brand Kit Token Declarations */
   --brand: #ec8951;
   --dark: #333333;
   --mid-gray: #aaaaaa;
   --gray: #6a6a6a;
   --light: #d9d9d9;
   --lighter: #f8f8f8;
+}
+
+/* FIX: Explicitly clear dark mode system variables that Tailwind v4 injects */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #f8fafc !important;
+    --foreground: #0f172a !important;
+  }
 }
 
 /* Mount variables directly into Tailwind v4 Core Utility Engine */
@@ -38,11 +49,12 @@
   --breakpoint-above-mobile: 578px;
 }
 
+/* FIX: Cleaned up duplicate @theme breakpoints block that was at the bottom */
+
 body {
-  /* Fix: Removed invalid quotes around color string values */
-  background-color: #ffffff !important;
-  color: var(--foreground);
-  font-family: "Montserrat", sans-serif;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  font-family: var(--font-montserrat), sans-serif;
 }
 
 .parent:hover .anime {
@@ -51,8 +63,8 @@ body {
 
 .parent-link:hover .sub-link {
   opacity: 1;
-  /* Note: opacity values range from 0 to 1 in standard CSS, not 100 */
 }
+
 
 
 @theme {
