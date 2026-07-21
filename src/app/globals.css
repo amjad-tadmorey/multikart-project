@@ -1,2 +1,62 @@
 @import "tailwindcss";
 
+/* Force Tailwind v4 to ignore system dark mode settings */
+@variant dark (&:where(.disable-dark-mode-safeguard));
+
+:root {
+  /* Fix: Set foreground to a dark charcoal color so text is visible */
+  --background: #ffffff;
+  --foreground: #1e293b;
+
+  /* Brand Kit Token Declarations (Permanently Fixed to Light Mode) */
+  --brand: #ec8951;
+  --dark: #333333;
+  --mid-gray: #aaaaaa;
+  --gray: #6a6a6a;
+  --light: #d9d9d9;
+  --lighter: #f8f8f8;
+}
+
+/* Mount variables directly into Tailwind v4 Core Utility Engine */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Overridden to safely hook up Next.js Montserrat engine */
+  --font-sans: var(--font-montserrat), Arial, Helvetica, sans-serif;
+
+  /* Map your brand kit variables into standard utilities */
+  --color-brand: var(--brand);
+  --color-dark: var(--dark);
+  --color-mid-gray: var(--mid-gray);
+  --color-gray: var(--gray);
+  --color-light: var(--light);
+  --color-lighter: var(--lighter);
+
+  /* Breakpoints */
+  --breakpoint-special: 1116px;
+  --breakpoint-above-mobile: 578px;
+}
+
+body {
+  /* Fix: Removed invalid quotes around color string values */
+  background-color: #ffffff !important;
+  color: var(--foreground);
+  font-family: "Montserrat", sans-serif;
+}
+
+.parent:hover .anime {
+  animation: marqueeCustom 12s linear infinite;
+}
+
+.parent-link:hover .sub-link {
+  opacity: 1;
+  /* Note: opacity values range from 0 to 1 in standard CSS, not 100 */
+}
+
+
+@theme {
+  /* This creates a custom prefix breakpoint called "special:" */
+  --breakpoint-special: 1116px;
+  --breakpoint-above-mobile: 578px;
+}
