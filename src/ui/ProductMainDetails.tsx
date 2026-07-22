@@ -27,7 +27,7 @@ const ProductMainDetails = ({ product }: any) => {
           {/* Main Headings */}
           <div className="space-y-1">
             <h1 className="text-[28px] font-bold text-[#333333] leading-tight tracking-tight">
-              Gym Coords Set (Brown)
+              {product.title}
             </h1>
           </div>
 
@@ -42,7 +42,7 @@ const ProductMainDetails = ({ product }: any) => {
             </div>
             <span className="text-neutral-300">|</span>
             <button className="text-[#ec8951] underline underline-offset-2 cursor-pointer">
-              20 Reviews
+              {product.reviews} Reviews
             </button>
           </div>
 
@@ -50,7 +50,7 @@ const ProductMainDetails = ({ product }: any) => {
           <div className="space-y-0.5 pt-1 ">
             <div className="text-[22px] font-semibold text-[#ec8951]">
               <span className="text-neutral-400 mr-1.5 text-lg"><span className="font-medium text-xl">MRP:</span></span>
-              $15.00
+              ${product.price}
             </div>
             <div className="text-sm font-medium">
               Inclusive all the text

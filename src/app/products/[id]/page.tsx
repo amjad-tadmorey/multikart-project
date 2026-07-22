@@ -12,8 +12,9 @@ const product = {
         "/data-product-1-2.jpg",
         "/data-product-1-3.jpg",
         "/data-product-1-4.jpg",
-    ]
-
+    ],
+    reviews: 20,
+    price: 15.00,
 }
 
 // 2. Define the types for your route parameters
