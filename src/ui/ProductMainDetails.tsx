@@ -5,7 +5,7 @@ import ImageGallery from './ImageGallery'
 
 const ProductMainDetails = ({ product }: any) => {
   return (
-    <section className="relative grid grid-cols-1 lg:grid-cols-3 gap-10 items-start border-light">
+    <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-10 items-start border-light">
 
       {/* LEFT COLUMN: Takes up 2 out of 3 columns on desktop screens */}
       <div className="lg:col-span-2 flex space-y-12 flex-col lg:flex-row">
@@ -182,7 +182,7 @@ const ProductMainDetails = ({ product }: any) => {
           </div>
 
           {/* 2. Quantity Selector */}
-          <div className="flex items-center border border-neutral-200 mb-5 overflow-hidden bg-lighter py-2">
+          <div className="flex items-center border border-neutral-200 mb-5 overflow-hidden bg-white py-2">
             <div className="px-4 py-2 text-neutral-600 font-bold select-none cursor-pointer mx-2 bg-white shadow-sm">
               <RiArrowLeftSLine size={20} className="font-bold" />
             </div>
