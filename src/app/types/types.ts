@@ -1,0 +1,1 @@
+export type OpenTabsState = Record<string, boolean>;
