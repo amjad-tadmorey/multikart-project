@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+// Import the new animated popup card
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ThumbNav from "@/components/ThumbNav";
-// Import the new animated popup card
 import PopupCard from "@/components/PopupCard";
 
 const assignmentMontserrat = Montserrat({
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     // FIX: Added className="light" and style={{ colorScheme: "light" }}
     <html lang="en" className={`${assignmentMontserrat.variable} light`} style={{ colorScheme: "light" }}>
-      <body className="flex min-h-screen flex-col bg-slate-50 pb-16 md:pb-0">
+      <body className="flex min-h-screen flex-col bg-slate-50 pb-16 md:pb-0 overflow-x-hidden">
         <Header />
         <main className="flex-1 w-full">{children}</main>
         <Footer />

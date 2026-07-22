@@ -1,5 +1,5 @@
-import { MAIN_NAV } from '@/app/lib/navData';
-import { OpenTabsState } from '@/app/types/types';
+import { MAIN_NAV } from '@/lib/navData';
+import { OpenTabsState } from '@/types/types';
 import { RiAddLine, RiCloseLine, RiSubtractLine } from '@remixicon/react';
 import React, { useState } from 'react';
 

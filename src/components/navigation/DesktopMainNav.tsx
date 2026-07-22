@@ -1,5 +1,6 @@
-import { MAIN_NAV } from '@/app/lib/navData';
+import { MAIN_NAV } from '@/lib/navData';
 import { RiArrowDownSLine, RiTriangleFill } from '@remixicon/react';
+import Link from 'next/link';
 
 
 const DesktopMainNav = () => {
@@ -8,12 +9,12 @@ const DesktopMainNav = () => {
 
             {/* HOME */}
             <div className="group py-3">
-                <a href="/" className="hover:text-brand transition-colors duration-500">Home</a>
+                <Link href="/" className="hover:text-brand transition-colors duration-500">Home</Link>
             </div>
 
             {/* FEATURE */}
             <div className="group py-3">
-                <a href="/" className="hover:text-brand transition-colors duration-500 flex items-center">Feature <RiArrowDownSLine size={16} /></a>
+                <Link href="/" className="hover:text-brand transition-colors duration-500 flex items-center">Feature <RiArrowDownSLine size={16} /></Link>
                 <div className="absolute top-24 left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
                     <div className="grid grid-cols-6 grid-rows-[180px_40px_auto] w-275 max-w-6xl bg-white border border-gray-100 shadow-2xl rounded-md p-8 gap-6 text-left">
                         {
@@ -25,9 +26,9 @@ const DesktopMainNav = () => {
                                         </h4>
                                         <div className="flex flex-col gap-2 mt-4 text-xs font-normal text-gray-500">
                                             {
-                                                main?.links?.map(link => <a href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">                            <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
+                                                main?.links?.map(link => <Link href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">                            <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
                                                     {link.title}
-                                                </a>)
+                                                </Link>)
                                             }
                                         </div>
                                     </>
@@ -44,16 +45,16 @@ const DesktopMainNav = () => {
 
             {/* SHOP */}
             <div className="group py-3 relative">
-                <a href="/" className="hover:text-brand transition-colors duration-500 flex items-center">Shop <RiArrowDownSLine size={16} /></a>
+                <Link href="/" className="hover:text-brand transition-colors duration-500 flex items-center">Shop <RiArrowDownSLine size={16} /></Link>
                 <div className="absolute top-10 left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
                     <div className="w-60 max-w-6xl max-h-96 overflow-y-auto bg-white border border-gray-100 shadow-2xl rounded-md py-6 px-8 flex flex-col gap-5 parent-link relative">
                         <div className="flex flex-col gap-4 text-xs font-normal text-gray-500">
                             {
                                 MAIN_NAV.shop.links.map(link =>
-                                    <a key={link.title} href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">
+                                    <Link key={link.title} href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">
                                         <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
                                         {link.title}
-                                    </a>
+                                    </Link>
                                 )
                             }
                         </div>
@@ -64,7 +65,7 @@ const DesktopMainNav = () => {
 
             {/* PRODUCTS */}
             <div className="group py-3">
-                <a href="/" className="hover:text-brand transition-colors duration-500 flex items-center">Product <RiArrowDownSLine size={16} /></a>
+                <Link href="/products" className="hover:text-brand transition-colors duration-500 flex items-center">Product <RiArrowDownSLine size={16} /></Link>
                 <div className="absolute top-24 left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
                     <div className="grid grid-cols-5 grid-rows-2 w-275 max-w-6xl bg-white border border-gray-100 shadow-2xl rounded-md p-8 gap-6 text-left">
                         {
@@ -76,9 +77,9 @@ const DesktopMainNav = () => {
                                         </h4>
                                         <div className="flex flex-col gap-2 mt-4 text-xs font-normal text-gray-500">
                                             {
-                                                main?.links?.map(link => <a href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">                            <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
+                                                main?.links?.map(link => <Link href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">                            <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
                                                     {link.title}
-                                                </a>)
+                                                </Link>)
                                             }
                                         </div>
                                     </>
@@ -96,9 +97,9 @@ const DesktopMainNav = () => {
             {/* PAGES */}
             {/* 5. PAGES */}
             <div className="group py-3 relative">
-                <a href="/" className="hover:text-brand transition-colors duration-500 flex items-center gap-0.5">
+                <Link href="/" className="hover:text-brand transition-colors duration-500 flex items-center gap-0.5">
                     Pages <RiArrowDownSLine size={16} />
-                </a>
+                </Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
                     <div className="w-64 bg-white border border-gray-100 shadow-2xl rounded-md p-2 flex flex-col text-xs font-normal text-gray-500 text-left">
                         {MAIN_NAV.pages && MAIN_NAV.pages.map((l1: any, index: number) => (
@@ -131,9 +132,9 @@ const DesktopMainNav = () => {
                                                             <div className="absolute top-0 left-full pl-3 opacity-0 invisible translate-x-2 group-hover/level3:opacity-100 group-hover/level3:visible group-hover/level3:translate-x-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover/level3:pointer-events-auto">
                                                                 <div className="w-52 bg-white border border-gray-100 shadow-xl rounded-md p-3 flex flex-col gap-1">
                                                                     {l2.subLinks && l2.subLinks.map((l3: any, l3Idx: number) => (
-                                                                        <a key={l3Idx} href={l3.path} className="px-2 py-1.5 text-xs text-gray-600 hover:bg-gray-50 hover:text-brand rounded transition-colors duration-300">
+                                                                        <Link key={l3Idx} href={l3.path} className="px-2 py-1.5 text-xs text-gray-600 hover:bg-gray-50 hover:text-brand rounded transition-colors duration-300">
                                                                             {l3.title}
-                                                                        </a>
+                                                                        </Link>
                                                                     ))}
                                                                 </div>
                                                             </div>
@@ -143,9 +144,9 @@ const DesktopMainNav = () => {
 
                                                 // Clean Plain Standard Anchor Link for Level 2
                                                 return (
-                                                    <a key={l2Idx} href={l2.path} className="px-2 py-1.5 text-xs text-gray-600 hover:bg-gray-50 hover:text-brand rounded transition-colors duration-300">
+                                                    <Link key={l2Idx} href={l2.path} className="px-2 py-1.5 text-xs text-gray-600 hover:bg-gray-50 hover:text-brand rounded transition-colors duration-300">
                                                         {l2.title}
-                                                    </a>
+                                                    </Link>
                                                 );
                                             })}
                                         </div>
@@ -160,16 +161,16 @@ const DesktopMainNav = () => {
 
             {/* 5. BLOG */}
             <div className="group py-3 relative">
-                <a href="/" className="hover:text-brand transition-colors duration-500 flex items-center">Blog <RiArrowDownSLine size={16} /></a>
+                <Link href="/" className="hover:text-brand transition-colors duration-500 flex items-center">Blog <RiArrowDownSLine size={16} /></Link>
                 <div className="absolute top-10 left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
                     <div className="w-60 max-w-6xl max-h-96 overflow-y-auto bg-white border border-gray-100 shadow-2xl rounded-md py-6 px-8 flex flex-col gap-5 parent-link relative">
                         <div className="flex flex-col gap-4 text-xs font-normal text-gray-500">
                             {
                                 MAIN_NAV.blog.links.map(link =>
-                                    <a key={link.title} href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">
+                                    <Link key={link.title} href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">
                                         <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
                                         {link.title}
-                                    </a>
+                                    </Link>
                                 )
                             }
                         </div>

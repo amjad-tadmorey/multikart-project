@@ -29,7 +29,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     const id = resolvedParams.id;
 
     return (
-        <div className="">
+        <div className="max-w-7xl mx-auto">
             <div className="bg-lighter py-8">
                 <h1 className="text-3xl text-center font-md">Gym Coords Set</h1>
                 <p className="text-center text-gray font-semibold mt-2">Home / Product / Gym Coords Set</p>

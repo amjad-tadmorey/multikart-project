@@ -5,10 +5,10 @@ import ImageGallery from './ImageGallery'
 
 const ProductMainDetails = ({ product }: any) => {
   return (
-    <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-10 items-start border-light">
+    <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-5 above-mobile:gap-10 items-start border-light">
 
       {/* LEFT COLUMN: Takes up 2 out of 3 columns on desktop screens */}
-      <div className="lg:col-span-2 flex space-y-12 flex-col lg:flex-row">
+      <div className="lg:col-span-2 flex space-y-3 above-mobile:space-y-12 flex-col lg:flex-row">
 
         <ImageGallery product={product} />
 
@@ -16,38 +16,40 @@ const ProductMainDetails = ({ product }: any) => {
 
         <div className="w-full text-mid-gray bg-white font-sans antialiased pt-4 px-4 space-y-4">
 
-          {/* Notification Alert Banner */}
-          <div className="flex items-center gap-2 text-sm font-medium ">
-            <svg className="w-3.5 h-3.5 transform rotate-45 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-            </svg>
-            <span className="text-gray">Selling fast! 4 people have this in their carts</span>
-          </div>
-
-          {/* Main Headings */}
-          <div className="space-y-1">
-            <h1 className="text-[28px] font-bold text-[#333333] leading-tight tracking-tight">
-              {product.title}
-            </h1>
-          </div>
-
-          {/* Ratings Tracker Area */}
-          <div className="flex items-center gap-1.5 text-lg text-neutral-400">
-            <div className="flex items-center gap-0.5 text-amber-400">
-              <RiStarFill size={18} />
-              <RiStarFill size={18} />
-              <RiStarFill size={18} />
-              <RiStarFill size={18} />
-              <RiStarLine size={18} />
+          <div className='text-center lg:text-start'>
+            {/* Notification Alert Banner */}
+            <div className="flex items-center justify-center above-mobile:justify-baseline gap-2 text-sm font-medium ">
+              <svg className="w-3.5 h-3.5 transform rotate-45 shrink-0 hidden" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+              </svg>
+              <span className="text-gray text-xs above-mobile:text-md">Selling fast! 4 people have this in their carts</span>
             </div>
-            <span className="text-neutral-300">|</span>
-            <button className="text-[#ec8951] underline underline-offset-2 cursor-pointer">
-              {product.reviews} Reviews
-            </button>
+
+            {/* Main Headings */}
+            <div className="space-y-1">
+              <h1 className="text-xl above-mobile:text-[28px] font-bold text-[#333333] leading-tight tracking-tight">
+                {product.title}
+              </h1>
+            </div>
+
+            {/* Ratings Tracker Area */}
+            <div className="flex items-center justify-center lg:justify-normal gap-1.5 text-lg text-neutral-400">
+              <div className="flex items-center  gap-0.5 text-amber-400">
+                <RiStarFill size={18} />
+                <RiStarFill size={18} />
+                <RiStarFill size={18} />
+                <RiStarFill size={18} />
+                <RiStarLine size={18} />
+              </div>
+              <span className="text-neutral-300">|</span>
+              <button className="text-[#ec8951] underline underline-offset-2 cursor-pointer">
+                {product.reviews} Reviews
+              </button>
+            </div>
           </div>
 
           {/* Price Presentation Segment */}
-          <div className="space-y-0.5 pt-1 ">
+          <div className="space-y-0.5 pt-1 text-center lg:text-start">
             <div className="text-[22px] font-semibold text-[#ec8951]">
               <span className="text-neutral-400 mr-1.5 text-lg"><span className="font-medium text-xl">MRP:</span></span>
               ${product.price}
@@ -58,11 +60,11 @@ const ProductMainDetails = ({ product }: any) => {
           </div>
 
           {/* Quick Navigation Utility Bars */}
-          <div className="flex text-md items-center gap-4 font-thin py-3 border-t border-b border-neutral-200 mt-2 border-dashed">
-            <button className="flex items-center gap-1.5 cursor-pointer">
+          <div className="flex text-md justify-center lg:justify-normal items-center gap-4 font-thin py-3 border-t border-b border-neutral-200 mt-2 border-dashed">
+            <button className="flex items-center gap-1.5 cursor-pointer text-sm above-mobile:text-md">
               <span><RiTruckLine size={18} /></span> Delivery & Return
             </button>
-            <button className="flex items-center gap-1.5 cursor-pointer">
+            <button className="flex items-center gap-1.5 cursor-pointer text-sm above-mobile:text-md">
               <span><RiQuestionnaireLine size={18} /></span> Ask a Question
             </button>
           </div>

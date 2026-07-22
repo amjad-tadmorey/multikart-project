@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
     RiEqualizer2Line,
     RiHeartFill,
@@ -8,140 +9,158 @@ import {
     RiSearchLine,
     RiShoppingCartLine,
     RiUser3Fill,
-} from '@remixicon/react';
+} from "@remixicon/react";
+
 import DesktopMainNav from "./navigation/DesktopMainNav";
-import MobileMainNave from "./navigation/MobileMainNav";
+import MobileMainNav from "./navigation/MobileMainNav";
 import LeftSide from "./navigation/LeftSide";
+
+function MenuButton({
+    onClick,
+    ariaLabel,
+}: {
+    onClick: () => void;
+    ariaLabel: string;
+}) {
+    return (
+        <button
+            onClick={onClick}
+            aria-label={ariaLabel}
+            className="p-1 cursor-pointer transition-colors duration-300 hover:text-brand"
+        >
+            <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+            >
+                <line x1="3" y1="4" x2="10" y2="4" />
+                <line x1="3" y1="12" x2="20" y2="12" />
+                <line x1="3" y1="20" x2="15" y2="20" />
+            </svg>
+        </button>
+    );
+}
+
+function Logo({ mobile = false }: { mobile?: boolean }) {
+    return (
+        <Link
+            href="/"
+            className={`items-center gap-2 ${mobile
+                ? "flex above-mobile:hidden"
+                : "hidden above-mobile:flex"
+                }`}
+        >
+            <img
+                src="/logo.png"
+                alt="Logo"
+                className={mobile ? "w-32" : "w-40"}
+            />
+        </Link>
+    );
+}
 
 export default function Header() {
     const [isLeftOpen, setIsLeftOpen] = useState(false);
     const [isRightOpen, setIsRightOpen] = useState(false);
 
+    const closeMenus = () => {
+        setIsLeftOpen(false);
+        setIsRightOpen(false);
+    };
+
     useEffect(() => {
-        if (isLeftOpen || isRightOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
+        document.body.style.overflow =
+            isLeftOpen || isRightOpen ? "hidden" : "";
+
+        return () => {
             document.body.style.overflow = "";
-        }
-        return () => { document.body.style.overflow = ""; };
+        };
     }, [isLeftOpen, isRightOpen]);
 
     return (
         <>
-            {/* Main Header Container Flow */}
-            <header className="w-full shadow-sm bg-white/80 backdrop-blur-md relative z-40">
-                {/* Top Info Bar */}
-                <div className="hidden above-mobile:flex items-center justify-between bg-dark text-light px-4 md:px-30 text-sm">
+            <header className="relative z-40 w-full bg-white/80 shadow-sm backdrop-blur-md">
+                {/* Top Bar */}
+                <div className="hidden above-mobile:flex items-center justify-between bg-dark px-4 md:px-30 text-sm text-light">
                     <div className="flex items-center">
-                        <p className="py-2.5 pr-6 hidden sm:block">Welcome to Our store Multikart</p>
+                        <p className="hidden sm:block py-2.5 pr-6">
+                            Welcome to Our Store Multikart
+                        </p>
+
                         <p className="flex items-center py-2.5">
-                            <RiPhoneFill size={16} className="text-brand shrink-0 mr-2" />
+                            <RiPhoneFill
+                                size={16}
+                                className="mr-2 shrink-0 text-brand"
+                            />
                             Call Us: 123 - 456 - 7890
                         </p>
                     </div>
+
                     <div className="flex items-center">
-                        <RiHeartFill size={16} className="text-light hover:scale-110 transition-transform duration-500 cursor-pointer" />
-                        <p className="flex items-center gap-2 pl-8 py-2.5">
-                            <RiUser3Fill className="text-light" size={16} />
+                        <RiHeartFill
+                            size={16}
+                            className="cursor-pointer transition-transform duration-300 hover:scale-110"
+                        />
+
+                        <p className="flex items-center gap-2 py-2.5 pl-8">
+                            <RiUser3Fill size={16} />
                             My Account
                         </p>
                     </div>
                 </div>
 
-                {/* Navbar Content Branding Row */}
-                <div className="mx-auto flex above-mobile:py-8 py-4 max-w-6xl items-center justify-between px-4 gap-8">
+                {/* Main Header */}
+                <div className="mx-auto flex max-w-6xl items-center justify-between gap-8 px-4 py-4 above-mobile:py-8">
                     <div className="flex items-center gap-6">
-
-                        <button
+                        <MenuButton
                             onClick={() => setIsLeftOpen(true)}
-                            className="p-1 relative transition-colors duration-500 cursor-pointer group"
-                            aria-label="Open Category Navigation"
-                        >
-                            {/* Custom 3-Line Dynamic Width Hamburger Icon */}
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                                className="transition-colors duration-500"
-                            >
-                                {/* Top line - Shifted up to y=4 */}
-                                <line x1="3" y1="4" x2="10" y2="4" className="transition-all duration-500" />
+                            ariaLabel="Open Categories"
+                        />
 
-                                {/* Middle line - Kept centered at y=12 */}
-                                <line x1="3" y1="12" x2="20" y2="12" className="transition-all duration-500" />
-
-                                {/* Bottom line - Shifted down to y=20 */}
-                                <line x1="3" y1="20" x2="15" y2="20" className="transition-all duration-500" />
-                            </svg>
-
-                        </button>
-
-                        <a href="/" className="hidden above-mobile:flex  items-center gap-2 font-bold text-xl text-blue-600 tracking-tight">
-                            <img src="/logo.png" alt="Logo" className="w-40" />
-                        </a>
+                        <Logo />
                     </div>
 
-                    <a href="/" className="above-mobile:hidden flex items-center gap-2 font-bold text-xl text-blue-600 tracking-tight">
-                        <img src="/logo.png" alt="Logo" className="w-32" />
-                    </a>
+                    <Logo mobile />
 
-
-                    {/* DESKTOP NAV - EACH LINK HAS ITS OWN DISTINCT CUSTOM WRAPPER BOX */}
                     <DesktopMainNav />
 
-                    {/* Actions Utilities Tray */}
                     <div className="flex items-center gap-4 text-gray">
-                        <button
-                            onClick={() => setIsRightOpen(true)}
-                            className="block text-brand special:hidden p-1 hover:text-brand relative transition-colors duration-500 cursor-pointer"
-                            aria-label="Open Mobile View Options"
-                        >
-                            {/* Custom 3-Line Dynamic Width Hamburger Icon */}
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                                className="transition-colors duration-500"
-                            >
-                                {/* Top line - Shifted up to y=4 */}
-                                <line x1="3" y1="4" x2="10" y2="4" className="transition-all duration-500" />
+                        <div className="special:hidden">
+                            <MenuButton
+                                onClick={() => setIsRightOpen(true)}
+                                ariaLabel="Open Mobile Navigation"
+                            />
+                        </div>
 
-                                {/* Middle line - Kept centered at y=12 */}
-                                <line x1="3" y1="12" x2="20" y2="12" className="transition-all duration-500" />
+                        <RiSearchLine className="hidden cursor-pointer transition-colors duration-300 hover:text-brand above-mobile:block" />
 
-                                {/* Bottom line - Shifted down to y=20 */}
-                                <line x1="3" y1="20" x2="15" y2="20" className="transition-all duration-500" />
-                            </svg>
-                        </button>
+                        <RiEqualizer2Line className="hidden cursor-pointer transition-colors duration-300 hover:text-brand above-mobile:block" />
 
-                        <RiSearchLine className="hidden above-mobile:block cursor-pointer hover:text-brand relative transition-colors duration-500" />
-                        <RiEqualizer2Line className="hidden above-mobile:block cursor-pointer hover:text-brand relative transition-colors duration-500" />
-                        <RiShoppingCartLine className="hidden above-mobile:block cursor-pointer hover:text-brand relative transition-colors duration-500" />
-
+                        <RiShoppingCartLine className="hidden cursor-pointer transition-colors duration-300 hover:text-brand above-mobile:block" />
                     </div>
-
                 </div>
-
             </header>
 
             {(isLeftOpen || isRightOpen) && (
                 <div
-                    onClick={() => { setIsLeftOpen(false); setIsRightOpen(false); }}
-                    className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 transition-opacity duration-500"
+                    onClick={closeMenus}
+                    className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
                 />
             )}
 
-            <LeftSide setIsLeftOpen={setIsLeftOpen} isLeftOpen={isLeftOpen} />
+            <LeftSide
+                isLeftOpen={isLeftOpen}
+                setIsLeftOpen={setIsLeftOpen}
+            />
 
-            <MobileMainNave isRightOpen={isRightOpen} setIsRightOpen={setIsRightOpen} />
+            <MobileMainNav
+                isRightOpen={isRightOpen}
+                setIsRightOpen={setIsRightOpen}
+            />
         </>
     );
 }

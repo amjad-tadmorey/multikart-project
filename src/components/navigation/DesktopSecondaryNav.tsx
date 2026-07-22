@@ -1,4 +1,4 @@
-import { SECONDARY_NAV } from '@/app/lib/navData';
+import { SECONDARY_NAV } from '@/lib/navData';
 import { RiArrowDownSLine, RiTriangleFill } from '@remixicon/react';
 
 
