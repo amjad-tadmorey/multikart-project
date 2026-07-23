@@ -2,18 +2,35 @@
 
 import React, { useState, useRef, useMemo } from 'react';
 
+// Define explicit image payload shapes instead of using any
+export interface GalleryImagePayload {
+    id?: string | number;
+    src: string;
+}
 
-export default function ImageGallery({ images }: any) {
-    // Combine main image and remaining gallery images into a flat array
+interface ImageGalleryProps {
+    images?: GalleryImagePayload[] | null;
+}
+
+export default function ImageGallery({ images }: ImageGalleryProps) {
+    // Standardize fallback states if image arrays are missing
     const allImages = useMemo(() => {
-        return [...images];
-    }, [images, images]);
+        return images ? [...images] : [];
+    }, [images]);
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState<number>(0);
     const thumbnailContainerRef = useRef<HTMLDivElement>(null);
 
-    // Handles clicking thumbnails and centers them smoothly inside the track window
-    const handleThumbClick = (index: number) => {
+    // Guard structure checking to prevent application crashing on empty array arrays
+    if (allImages.length === 0) {
+        return (
+            <div className="w-full aspect-4/5 bg-neutral-100 rounded flex items-center justify-center text-xs text-neutral-400">
+                No Preview Images Available
+            </div>
+        );
+    }
+
+    const handleThumbClick = (index: number): void => {
         setSelectedIndex(index);
 
         const container = thumbnailContainerRef.current;
@@ -35,14 +52,14 @@ export default function ImageGallery({ images }: any) {
     return (
         <div className="w-full space-y-4 select-none">
             {/* 1. Main View Display Panel */}
-            {/* bg-neutral-200 acts as the universal fallback container color */}
             <div className="relative aspect-4/5 w-full overflow-hidden bg-neutral-200">
                 {allImages.map((img, idx) => {
                     const isSelected = idx === selectedIndex;
                     return (
                         <img
-                            key={`main-view-${idx}`}
-                            src={images[0].src}
+                            key={`main-view-${img.id || idx}`}
+                            /* FIXED: Changed from images[0].src to img.src to reflect the current item in the loop */
+                            src={img.src}
                             alt={`Product view ${idx + 1}`}
                             className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-300 ease-in-out
                                 ${isSelected
@@ -57,15 +74,15 @@ export default function ImageGallery({ images }: any) {
             {/* 2. Slideable Thumbnails Row */}
             <div
                 ref={thumbnailContainerRef}
-                className="flex max-w-[280px] overflow-x-auto px-4 py-2 gap-3 pb-2 scroll-smooth snap-x snap-mandatory [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
+                className="flex w-full lg:max-w-[300px] overflow-x-auto px-4 py-2 gap-3 pb-2 scroll-smooth snap-x snap-mandatory [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
             >
                 {allImages.map((img, idx) => {
                     const isActive = idx === selectedIndex;
                     return (
                         <button
-                            key={`thumb-btn-${idx}`}
+                            type="button"
+                            key={`thumb-btn-${img.id || idx}`}
                             onClick={() => handleThumbClick(idx)}
-                            // bg-neutral-200 style acts as the local fallback size wrapper 
                             className={`relative cursor-pointer aspect-square w-20 sm:w-24 shrink-0 overflow-hidden bg-neutral-200 snap-center transition-all duration-300 ease-out focus:outline-none
                                 ${isActive
                                     ? 'ring-2 ring-[#f07c4c] ring-offset-2 scale-100 opacity-100 shadow-md'
