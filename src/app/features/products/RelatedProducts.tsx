@@ -60,7 +60,7 @@ const RelatedProducts = () => {
                 </h1>
 
                 {/* Navigation Arrows: Only functional on smaller views/overflowing tracks */}
-                <div className="flex space-x-2">
+                {/* <div className="flex space-x-2">
                     <button
                         onClick={() => scroll('left')}
                         className="px-1 py-1 cursor-pointer border rounded-full hover:bg-neutral-50 active:bg-neutral-100 transition focus:outline-none"
@@ -75,7 +75,7 @@ const RelatedProducts = () => {
                     >
                         <RiArrowRightSLine />
                     </button>
-                </div>
+                </div> */}
             </div>
 
             {/* Slider container using layout calculations */}

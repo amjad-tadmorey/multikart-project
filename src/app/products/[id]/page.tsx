@@ -1,9 +1,8 @@
-import ProductMainDetails from "@/ui/ProductMainDetails";
-import RelatedProducts from "@/ui/RelatedProducts";
-import TabbedContent from "@/ui/TabbedContent";
+import ProductMainDetails from "@/app/features/products/ProductMainDetails";
+import RelatedProducts from "@/app/features/products/RelatedProducts";
+import TabbedContent from "@/app/features/products/TabbedContent";
 
 export const dynamic = "force-dynamic"
-
 
 const product = {
     title: "Gym Coords Set",

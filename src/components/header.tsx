@@ -18,6 +18,7 @@ import {
     RiArrowLeftSLine,
     RiArrowRightSLine
 } from '@remixicon/react';
+import TopHeader from "@/app/features/navui/TopHeader";
 
 // Left Sidebar Categories Nested Tree Data Configuration
 const leftSidebarTree = [
@@ -87,22 +88,7 @@ export default function Header() {
             {/* Main Header Container Flow */}
             <header className="w-full shadow-sm bg-white/80 backdrop-blur-md relative z-40">
                 {/* Top Info Bar */}
-                <div className="hidden above-mobile:flex items-center justify-between bg-dark text-light px-4 md:px-30 text-sm">
-                    <div className="flex items-center">
-                        <p className="py-2.5 pr-6 hidden sm:block">Welcome to Our store Multikart</p>
-                        <p className="flex items-center py-2.5">
-                            <RiPhoneFill size={16} className="text-brand shrink-0 mr-2" />
-                            Call Us: 123 - 456 - 7890
-                        </p>
-                    </div>
-                    <div className="flex items-center">
-                        <RiHeartFill size={16} className="text-light hover:scale-110 transition-transform duration-500 cursor-pointer" />
-                        <p className="flex items-center gap-2 pl-8 py-2.5">
-                            <RiUser3Fill className="text-light" size={16} />
-                            My Account
-                        </p>
-                    </div>
-                </div>
+                <TopHeader />
 
                 {/* Navbar Content Branding Row */}
                 <div className="mx-auto flex above-mobile:py-8 py-4 max-w-6xl items-center justify-between px-4">
@@ -522,9 +508,6 @@ export default function Header() {
                                     <div className="w-64 bg-white border border-gray-100 shadow-2xl rounded-md py-4 px-4 overflow-x-visible relative">
                                         <div className="flex flex-col text-xs font-normal text-gray-500">
 
-                                            {/* =========================================================
-                    CATEGORY 1: NESTED HOVER TREE (Table Style)
-                   ========================================================= */}
                                             <div className="relative group/level2 w-full">
                                                 {/* The main trigger block */}
                                                 <div className="flex items-center justify-between px-3 py-2 text-dark hover:bg-gray-50 hover:text-brand rounded-md transition-colors duration-300 cursor-pointer">
@@ -543,9 +526,7 @@ export default function Header() {
                                                 </div>
                                             </div>
 
-                                            {/* =========================================================
-                    CATEGORY 2: NESTED HOVER TREE (Top Filter)
-                   ========================================================= */}
+
                                             <div className="relative group/level2 w-full mt-0.5">
                                                 <div className="flex items-center justify-between px-3 py-2 text-dark hover:bg-gray-50 hover:text-brand rounded-md transition-colors duration-300 cursor-pointer">
                                                     <span className="text-sm font-medium">Top Filter</span>
@@ -652,6 +633,7 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
+
             </header>
 
             {/* Global Backdrop Overlay */}
@@ -662,11 +644,6 @@ export default function Header() {
                 />
             )}
 
-            {/* LEFT SIDEBAR (Category Tree Panel) */}
-            {/* ========================================================================= */}
-            {/* RESPONSIVE LAYOUT CONTAINER                                               */}
-            {/* md:overflow-visible allows flyouts to float outside without clipping      */}
-            {/* ========================================================================= */}
             <aside className={`fixed top-0 left-0 h-screen w-80 bg-white shadow-2xl z-50 transform transition-transform duration-500 ease-in-out p-6 
     overflow-y-auto md:overflow-y-visible 
     ${isLeftOpen ? 'translate-x-0' : '-translate-x-full'}`}

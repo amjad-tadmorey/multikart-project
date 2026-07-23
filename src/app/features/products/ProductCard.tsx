@@ -19,7 +19,7 @@ const ProductCard = ({ product }: any) => {
                 <img
                     src={product.img}
                     alt={product.title}
-                    className="h-80 w-full object-cover transition duration-500 group-hover:scale-105"
+                    className="h-40 above-mobile:h-80 w-full object-cover transition duration-500 group-hover:scale-105"
                 />
 
                 {/* Curtain Slide Action Icons Stack */}
