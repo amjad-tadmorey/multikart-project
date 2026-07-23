@@ -29,7 +29,7 @@ export default function PopupCard() {
     return (
         <div
             className={`fixed bottom-5 left-4 z-[100] transition-all duration-500 ease-in-out transform
-        above-mobile:w-100 mr-auto bg-white border border-light shadow-2xl rounded-md p-4 text-left flex items-start gap-8
+        above-mobile:w-100 mr-auto bg-white border border-light shadow-2xl rounded-md p-1 text-left flex items-start gap-8
         
         ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"}`}
         >

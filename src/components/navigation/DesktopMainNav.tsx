@@ -18,7 +18,7 @@ const DesktopMainNav = () => {
                 <div className="absolute top-24 left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
                     <div className="grid grid-cols-6 grid-rows-[180px_40px_auto] w-275 max-w-6xl bg-white border border-gray-100 shadow-2xl rounded-md p-8 gap-6 text-left">
                         {
-                            MAIN_NAV.feature.map((main) => <div key={main.title} className={`${main.gridSpace} `}>
+                            MAIN_NAV.feature.map((main) => <div key={main.id} className={`${main.gridSpace} `}>
                                 {
                                     !main.img && <>
                                         <h4 className="text-sm font-bold text-dark mb-3 relative after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-8 after:h-0.5 after:bg-brand">
@@ -26,7 +26,7 @@ const DesktopMainNav = () => {
                                         </h4>
                                         <div className="flex flex-col gap-2 mt-4 text-xs font-normal text-gray-500">
                                             {
-                                                main?.links?.map(link => <Link href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">                            <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
+                                                main?.links?.map(link => <Link key={link.id} href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">                            <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
                                                     {link.title}
                                                 </Link>)
                                             }
@@ -51,7 +51,7 @@ const DesktopMainNav = () => {
                         <div className="flex flex-col gap-4 text-xs font-normal text-gray-500">
                             {
                                 MAIN_NAV.shop.links.map(link =>
-                                    <Link key={link.title} href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">
+                                    <Link key={link.id} href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">
                                         <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
                                         {link.title}
                                     </Link>
@@ -69,7 +69,7 @@ const DesktopMainNav = () => {
                 <div className="absolute top-24 left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
                     <div className="grid grid-cols-5 grid-rows-2 w-275 max-w-6xl bg-white border border-gray-100 shadow-2xl rounded-md p-8 gap-6 text-left">
                         {
-                            MAIN_NAV.product.map(main => <div key={main.title} className={`${main.gridSpace} `}>
+                            MAIN_NAV.product.map(main => <div key={main.id} className={`${main.gridSpace} `}>
                                 {
                                     !main.img && <>
                                         <h4 className="text-sm font-bold text-dark mb-3 relative after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-8 after:h-0.5 after:bg-brand">
@@ -77,7 +77,7 @@ const DesktopMainNav = () => {
                                         </h4>
                                         <div className="flex flex-col gap-2 mt-4 text-xs font-normal text-gray-500">
                                             {
-                                                main?.links?.map(link => <Link href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">                            <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
+                                                main?.links?.map(link => <Link key={link.id} href={link.path} className="hover:text-brand text-sm group/text relative transition-colors duration-500">                            <span className="absolute -bottom-1 left-0 h-1 w-0 bg-[#f99c0054] rounded-full transition-all duration-300 ease-out group-hover/text:w-1/4" />
                                                     {link.title}
                                                 </Link>)
                                             }

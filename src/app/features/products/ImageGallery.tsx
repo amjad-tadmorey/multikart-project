@@ -2,18 +2,12 @@
 
 import React, { useState, useRef, useMemo } from 'react';
 
-interface ProductProps {
-    product: {
-        mainImage: string;
-        imgs: string[];
-    };
-}
 
-export default function ImageGallery({ product }: ProductProps) {
+export default function ImageGallery({ images }: any) {
     // Combine main image and remaining gallery images into a flat array
     const allImages = useMemo(() => {
-        return [...product.imgs];
-    }, [product.mainImage, product.imgs]);
+        return [...images];
+    }, [images, images]);
 
     const [selectedIndex, setSelectedIndex] = useState(0);
     const thumbnailContainerRef = useRef<HTMLDivElement>(null);
@@ -48,11 +42,11 @@ export default function ImageGallery({ product }: ProductProps) {
                     return (
                         <img
                             key={`main-view-${idx}`}
-                            src={img}
+                            src={images[0].src}
                             alt={`Product view ${idx + 1}`}
                             className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-300 ease-in-out
-                                ${isSelected 
-                                    ? 'opacity-100 z-10' 
+                                ${isSelected
+                                    ? 'opacity-100 z-10'
                                     : 'opacity-0 z-0 pointer-events-none'
                                 }`}
                         />
@@ -63,7 +57,7 @@ export default function ImageGallery({ product }: ProductProps) {
             {/* 2. Slideable Thumbnails Row */}
             <div
                 ref={thumbnailContainerRef}
-                className="flex px-4 py-2 gap-3 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
+                className="flex max-w-[280px] overflow-x-auto px-4 py-2 gap-3 pb-2 scroll-smooth snap-x snap-mandatory [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
             >
                 {allImages.map((img, idx) => {
                     const isActive = idx === selectedIndex;
@@ -79,7 +73,7 @@ export default function ImageGallery({ product }: ProductProps) {
                                 }`}
                         >
                             <img
-                                src={img}
+                                src={img.src}
                                 alt={`Thumbnail view ${idx + 1}`}
                                 className="h-full w-full object-cover relative z-10"
                                 loading="lazy"

@@ -2,42 +2,9 @@
 
 import { useRef } from 'react';
 import ProductCard from './ProductCard';
-import { RiArrowLeftSLine, RiArrowRightSLine } from '@remixicon/react';
 
-const productsData = [
-    {
-        img: "/data-product-2.jpg",
-        title: "Glamour Gaze",
-        des: "Purple mini dress",
-        price: 4.34,
-        compareAtPrice: 50,
-        discount: 5
-    },
-    {
-        img: "/data-product-3.jpg",
-        title: "Glamour Gaze",
-        des: "Purple mini dress",
-        price: 4.34,
-        compareAtPrice: 50,
-        discount: 5
-    },
-    {
-        img: "/data-product-4.jpg",
-        title: "Glamour Gaze",
-        des: "Purple mini dress",
-        price: 4.34,
-    },
-    {
-        img: "/data-product-5.jpg",
-        title: "Glamour Gaze",
-        des: "Purple mini dress",
-        price: 4.34,
-        compareAtPrice: 50,
-        discount: 5
-    },
-];
 
-const RelatedProducts = () => {
+const RelatedProducts = ({ similar_products }: any) => {
     const sliderRef = useRef<HTMLDivElement>(null);
 
     // Optional handler if you ever want to add desktop arrow buttons
@@ -83,7 +50,7 @@ const RelatedProducts = () => {
                 ref={sliderRef}
                 className="flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory [-webkit-overflow-scrolling:touch] scrollbar-none [&::-webkit-scrollbar]:hidden"
             >
-                {productsData.map((p, index) => (
+                {similar_products.map((p: any, index: any) => (
                     <div
                         key={index}
                         className="snap-start shrink-0

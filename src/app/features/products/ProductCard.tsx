@@ -17,13 +17,10 @@ const ProductCard = ({ product }: any) => {
             {/* Image Container */}
             <div className="relative overflow-hidden bg-white above-mobile:p-3 p-1">
                 <img
-                    src={product.img}
-                    alt={product.title}
-<<<<<<< HEAD:src/app/features/products/ProductCard.tsx
-                    className="h-40 above-mobile:h-80 w-full object-cover transition duration-500 group-hover:scale-105"
-=======
+                    src={product.image}
+                    alt={product.name}
+
                     className="w-full object-cover transition duration-500 group-hover:scale-105"
->>>>>>> be852de4788a8659b796c894d3cf6227a15e4683:src/ui/ProductCard.tsx
                 />
 
                 {/* Curtain Slide Action Icons Stack */}
@@ -47,29 +44,27 @@ const ProductCard = ({ product }: any) => {
             <div className="px-3 py-1">
                 <div className='px-2'>
                     <h2 className="md:text-lg text-sm font-semibold text-gray-900">
-                        {product.title}
+                        {product.name}
                     </h2>
 
                     <p className="mt-1 text-xs text-gray-500">
-                        {product.des}
+                        {product.description}
                     </p>
 
                     {/* Price */}
                     <div className="mt-4 flex items-center gap-2">
                         <span className="md:text-lg text-xs text-gray-900">
-                            ${product.price}
+                            ${product.new_price}
                         </span>
 
-                        {product.discount && (
-                            <>
-                                <span className="text-gray-400 line-through text-xs md:text-lg">
-                                    ${product.compareAtPrice}
-                                </span>
-                                <span className="text-brand text-xs md:text-lg">
-                                    ${product.compareAtPrice} OFF
-                                </span>
-                            </>
-                        )}
+                        <>
+                            <span className="text-gray-400 line-through text-xs md:text-lg">
+                                ${product.old_price}
+                            </span>
+                            <span className="text-brand text-xs md:text-lg">
+                                ${product.old_price - product.new_price} OFF
+                            </span>
+                        </>
                     </div>
                 </div>
 
@@ -81,7 +76,7 @@ const ProductCard = ({ product }: any) => {
                         // style={{ animation: 'marqueeCustom 12s linear infinite' }}
                         className="anime flex whitespace-nowrap min-w-full shrink-0 items-center justify-around gap-4 [animation-duration:12s] group-hover:[animation-duration:6s]"
                     >
-                        <span className="text-xs font-thin uppercase tracking-wider text-black flex gap-2 items-center mr-12"> <RiDiscountPercentFill size={15} className='text-brand' /> Limited time offer: {product.discount || 5}% OFF</span>
+                        <span className="text-xs font-thin uppercase tracking-wider text-black flex gap-2 items-center mr-12"> <RiDiscountPercentFill size={15} className='text-brand' /> Limited time offer: ${product.old_price - product.new_price} OFF</span>
                     </div>
 
                     {/* Track 2 (Appended clone for a seamless infinity illusion) */}
@@ -90,7 +85,7 @@ const ProductCard = ({ product }: any) => {
                         className="anime flex whitespace-nowrap min-w-full shrink-0 items-center justify-around gap-4 [animation-duration:12s] group-hover:[animation-duration:6s]"
                         aria-hidden="true"
                     >
-                        <span className="text-xs font-thin uppercase tracking-wider text-black flex gap-2 items-center mr-12"> <RiDiscountPercentFill size={15} className='text-brand' /> Limited time offer: {product.discount || 5}% OFF</span>
+                        <span className="text-xs font-thin uppercase tracking-wider text-black flex gap-2 items-center mr-12"> <RiDiscountPercentFill size={15} className='text-brand' /> Limited time offer: ${product.old_price - product.new_price} OFF</span>
                     </div>
 
                 </div>

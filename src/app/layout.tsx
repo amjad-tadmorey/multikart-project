@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ThumbNav from "@/components/ThumbNav";
 import PopupCard from "@/components/PopupCard";
+import Providers from "./providers";
 
 const assignmentMontserrat = Montserrat({
   subsets: ["latin"],
@@ -19,15 +20,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // FIX: Added className="light" and style={{ colorScheme: "light" }}
-    <html lang="en" className={`${assignmentMontserrat.variable} light`} style={{ colorScheme: "light" }}>
-
-      <body className="flex min-h-screen flex-col bg-slate-50 pb-16 md:pb-0 overflow-x-hidden">
-        <Header />
-        <main className="flex-1 w-full">{children}</main>
-        <Footer />
-        <ThumbNav />
-        <PopupCard />
-      </body>
-    </html>
+    <Providers>
+      <html lang="en" className={`${assignmentMontserrat.variable} light`} style={{ colorScheme: "light" }}>
+        <body className="flex min-h-screen flex-col bg-slate-50 pb-16 md:pb-0 overflow-x-hidden">
+          <Header />
+          <main className="flex-1 w-full">{children}</main>
+          <Footer />
+          <ThumbNav />
+          <PopupCard />
+        </body>
+      </html>
+    </Providers>
   );
 }

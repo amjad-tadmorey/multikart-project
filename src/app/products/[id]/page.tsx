@@ -1,31 +1,40 @@
-import ProductMainDetails from "@/app/features/products/ProductMainDetails";
+"use client"
+
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+
+import ImageGallery from "@/app/features/products/ImageGallery";
+import ProductsInfo from "@/app/features/products/ProductsInfo";
+import ProductVariants from "@/app/features/products/ProductVariants";
+import ProductDetails from "@/app/features/products/ProductDetails";
 import RelatedProducts from "@/app/features/products/RelatedProducts";
-import TabbedContent from "@/app/features/products/TabbedContent";
 
 export const dynamic = "force-dynamic"
 
-const product = {
-    title: "Gym Coords Set",
-    mainImage: "/data-product-1-1.jpg",
-    imgs: [
-        "/data-product-1-2.jpg",
-        "/data-product-1-3.jpg",
-        "/data-product-1-4.jpg",
-    ],
-    reviews: 20,
-    price: 15.00,
-}
-
-// 2. Define the types for your route parameters
-interface PageProps {
-    params: Promise<{ id: string }>;
-}
+// 1. Define the Axios fetcher function
+const fetchProductById = async (id: string) => {
+    const response = await axios.get(`https://etrolley.net/api/etrollymarket/product/theme5/${id}`);
+    return response.data;
+};
 
 // Next.js App Router dynamic page components receive a params Promise
-export default async function ProductDetailPage({ params }: PageProps) {
+export default function ProductDetailPage() {
 
-    const resolvedParams = await params;
-    const id = resolvedParams.id;
+    const params = useParams<{ id: string }>();
+    const id = params.id;
+
+    // 2. Integrate TanStack Query
+    const { data, isLoading, error } = useQuery({
+        queryKey: ["product"],
+        queryFn: () => fetchProductById(id),
+    });
+
+
+    if (isLoading) return <p>Loading products...</p>;
+    if (error) return <p>Error loading data.</p>;
+
+    const { rate, reviews, product: { sale_price, name, description, sku, unit, quantity }, options, options_check, images: { images }, similar_products } = data.data
 
     return (
         <div className="max-w-7xl mx-auto">
@@ -34,9 +43,38 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 <p className="text-center text-gray font-semibold mt-2">Home / Product / Gym Coords Set</p>
             </div>
             <div className="px-2 md:px-20 space-y-6 mt-12">
-                <ProductMainDetails product={product} />
-                <TabbedContent />
-                <RelatedProducts />
+                <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-5 above-mobile:gap-10 items-start border-light">
+
+                    {/* LEFT COLUMN: Takes up 2 out of 3 columns on desktop screens */}
+                    <div className="lg:col-span-2 flex space-y-3 above-mobile:space-y-12 flex-col lg:flex-row">
+
+                        <ImageGallery images={images} />
+
+                        {/* B. Long Details block that forces this layout column to be taller than the gallery */}
+
+                        <ProductsInfo
+                            description={description}
+                            name={name}
+                            rate={rate}
+                            reviews={reviews}
+                            price={sale_price}
+                            sku={sku}
+                            unit={unit}
+                            quantity={quantity}
+                        />
+
+                    </div>
+
+                    {/* RIGHT COLUMN: Pins itself 24px below viewport top and scrolls within parent track */}
+                    <ProductVariants
+                        options={options}
+                        options_check={options_check}
+                        basePrice={Number(sale_price)}
+                    />
+
+                </section>
+                <ProductDetails reviews={reviews} />
+                <RelatedProducts similar_products={similar_products} />
             </div>
 
         </div>
