@@ -26,7 +26,6 @@ export default function ImageGallery({ product }: ProductProps) {
         if (container) {
             const thumbnailButton = container.children[index] as HTMLElement;
             if (thumbnailButton) {
-                // Calculate position to center the target thumbnail within the container viewport
                 const containerWidth = container.offsetWidth;
                 const thumbnailOffset = thumbnailButton.offsetLeft;
                 const thumbnailWidth = thumbnailButton.offsetWidth;
@@ -41,20 +40,24 @@ export default function ImageGallery({ product }: ProductProps) {
 
     return (
         <div className="w-full space-y-4 select-none">
-            {/* 1. Main View Display Panel (Smooth Cross-fade implementation) */}
-            <div className="relative aspect-4/5 w-full overflow-hidden bg-neutral-100">
-                {allImages.map((img, idx) => (
-                    <img
-                        key={idx}
-                        src={img}
-                        alt={`Product view ${idx + 1}`}
-                        className={`absolute inset-0 h-full w-full object-cover object-center transition-all duration-500 ease-in-out
-              ${idx === selectedIndex
-                                ? 'opacity-100 z-10 scale-100'
-                                : 'opacity-0 z-0 scale-95 pointer-events-none'
-                            }`}
-                    />
-                ))}
+            {/* 1. Main View Display Panel */}
+            {/* bg-neutral-200 acts as the universal fallback container color */}
+            <div className="relative aspect-4/5 w-full overflow-hidden bg-neutral-200">
+                {allImages.map((img, idx) => {
+                    const isSelected = idx === selectedIndex;
+                    return (
+                        <img
+                            key={`main-view-${idx}`}
+                            src={img}
+                            alt={`Product view ${idx + 1}`}
+                            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-300 ease-in-out
+                                ${isSelected 
+                                    ? 'opacity-100 z-10' 
+                                    : 'opacity-0 z-0 pointer-events-none'
+                                }`}
+                        />
+                    );
+                })}
             </div>
 
             {/* 2. Slideable Thumbnails Row */}
@@ -66,18 +69,19 @@ export default function ImageGallery({ product }: ProductProps) {
                     const isActive = idx === selectedIndex;
                     return (
                         <button
-                            key={idx}
+                            key={`thumb-btn-${idx}`}
                             onClick={() => handleThumbClick(idx)}
-                            className={`relative cursor-pointer aspect-square w-20 sm:w-24 shrink-0 overflow-hidden bg-neutral-50 snap-center transition-all duration-300 ease-out focus:outline-none
-                ${isActive
+                            // bg-neutral-200 style acts as the local fallback size wrapper 
+                            className={`relative cursor-pointer aspect-square w-20 sm:w-24 shrink-0 overflow-hidden bg-neutral-200 snap-center transition-all duration-300 ease-out focus:outline-none
+                                ${isActive
                                     ? 'ring-2 ring-[#f07c4c] ring-offset-2 scale-100 opacity-100 shadow-md'
-                                    : 'scale-95 opacity-40 hover:opacity-80'
+                                    : 'scale-95 opacity-50 hover:opacity-80'
                                 }`}
                         >
                             <img
                                 src={img}
                                 alt={`Thumbnail view ${idx + 1}`}
-                                className="h-full w-full object-cover"
+                                className="h-full w-full object-cover relative z-10"
                                 loading="lazy"
                             />
                         </button>

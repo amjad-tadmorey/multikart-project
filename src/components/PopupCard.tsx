@@ -29,7 +29,7 @@ export default function PopupCard() {
     return (
         <div
             className={`fixed bottom-5 left-4 z-[100] transition-all duration-500 ease-in-out transform
-        above-mobile:w-100 mr-auto bg-white border border-blue-500/40 shadow-2xl rounded-md p-1 text-left flex items-start gap-8
+        above-mobile:w-100 mr-auto bg-white border border-light shadow-2xl rounded-md p-4 text-left flex items-start gap-8
         
         ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"}`}
         >
@@ -43,7 +43,17 @@ export default function PopupCard() {
             </button>
 
             <div className="flex items-start gap-4">
-                <img src="/pop.jpg" alt="" />
+
+                {/* Image Placeholder Wrapper Box */}
+                {/* Adjust w-16 h-16 (64px) to match the exact size of your pop.jpg */}
+                <div className="relative w-16 h-16 shrink-0 aspect-square rounded bg-neutral-100 overflow-hidden">
+                    <img
+                        src="/pop.jpg"
+                        alt="Product preview"
+                        className="h-full w-full object-cover"
+                    />
+                </div>
+
                 {/* Pop-up Core Card Data Content Slots */}
                 <div className="flex flex-col gap-1 w-full">
                     <h4 className="font-bold text-md text-dark">Special Offer!</h4>
