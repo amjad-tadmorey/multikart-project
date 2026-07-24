@@ -17,7 +17,7 @@ const DesktopMainNav = () => {
                 {/* "NEW" Tooltip Badge */}
                 <div
                     className="absolute -top-3 right-2 inline-block bg-[#f0884d] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent"
-                    style={{ '--tw-content': "''" }} // Ensures content renders correctly in all build steps
+                    // Ensures content renders correctly in all build steps
                 >
                     New
                     <span
