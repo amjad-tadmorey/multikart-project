@@ -1,5 +1,7 @@
 import { RiArrowLeftRightLine, RiQuestionnaireLine, RiStarFill, RiStarLine, RiTruckLine } from '@remixicon/react'
-import Accordion from './Accordion'
+import Accordion from '../../ui/Accordion'
+import { useProductLoading } from '@/context/ProductLoadingContext'
+import ProductInfoSkeleton from '@/components/skeleton/ProductInfoSkeleton'
 
 interface ProductInfoProps {
     name: string,
@@ -14,22 +16,48 @@ interface ProductInfoProps {
 
 const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quantity }: ProductInfoProps) => {
 
+    const { isLoading } = useProductLoading()
 
+    if (isLoading) {
+        return (
+            <ProductInfoSkeleton />
+        )
+    }
     return (
         <div className="w-full text-mid-gray bg-white font-sans antialiased pt-4 px-4 space-y-4">
 
             <div className='text-center lg:text-start'>
                 {/* Notification Alert Banner */}
-                <div className="flex items-center justify-center above-mobile:justify-baseline gap-2 text-sm font-medium ">
-                    <svg className="w-3.5 h-3.5 transform rotate-45 shrink-0 hidden" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                <div className="flex items-center justify-center above-mobile:justify-baseline gap-2 text-sm font-medium">
+                    {/* Infinite Line-drawing Zigzag Arrow SVG */}
+                    <svg
+                        className="w-4 h-4 text-amber-500"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <path
+                            d="M3 17l5-5 4 4 9-9M17 7h4v4"
+                            style={{
+                                strokeDasharray: 50,
+                                strokeDashoffset: 50,
+                                animation: 'drawArrowInfinite 2.5s ease-in-out infinite'
+                            }}
+                        />
                     </svg>
-                    <span className="text-gray text-xs above-mobile:text-md">Selling fast! 4 people have this in their carts</span>
+
+                    <span className="text-gray text-sm above-mobile:text-md mb-2">
+                        Selling fast! 4 people have this in their carts
+                    </span>
                 </div>
+
 
                 {/* Main Headings */}
                 <div className="space-y-1">
-                    <h1 className="text-xl above-mobile:text-[28px] font-bold text-[#333333] leading-tight tracking-tight">
+                    <h1 className="text-lg above-mobile:text-[24px] font-bold text-[#333333] leading-tight tracking-tight">
                         {name}
                     </h1>
                 </div>
@@ -38,7 +66,6 @@ const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quan
                 <div className="flex items-center justify-center lg:justify-normal gap-1.5 text-lg text-neutral-400">
                     <div className="flex items-center gap-0.5 text-amber-400">
                         {[1, 2, 3, 4, 5].map((starValue) => {
-                            // If the rate is greater than or equal to the current star value, fill it
                             return rate >= starValue ? (
                                 <RiStarFill key={starValue} size={18} />
                             ) : (
@@ -74,7 +101,6 @@ const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quan
                     <span><RiQuestionnaireLine size={18} /></span> Ask a Question
                 </button>
             </div>
-
             {/* Accordions Root Segment */}
             <div className="space-y-2.5 pt-2">
 
@@ -136,9 +162,7 @@ const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quan
 
                                 {/* Flex container for the payment badges */}
                                 <div className="flex items-center justify-center gap-3 mt-2">
-
                                     <img src="/payments.png" alt="" className="w-70" />
-
                                 </div>
                             </fieldset>
                         </div>
@@ -154,24 +178,16 @@ const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quan
 
                                 {/* Flex container for the payment badges */}
                                 <div className="flex items-center justify-center gap-3 mt-2">
-
                                     <img src="/secure_payments.png" alt="" className="w-70" />
-
                                 </div>
                             </fieldset>
                         </div>
 
-
                     </div>
                 </Accordion>
-
-
-
             </div>
-
         </div>
+    );
+};
 
-    )
-}
-
-export default ProductsInfo
+export default ProductsInfo;

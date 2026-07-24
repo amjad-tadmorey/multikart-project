@@ -1,5 +1,8 @@
 import React from 'react';
 import { RiStarFill, RiStarLine } from '@remixicon/react';
+import { useProductLoading } from '@/context/ProductLoadingContext';
+import Skeleton from '@/components/skeleton/Skeleton';
+import ReviewSkelton from '@/components/skeleton/ReviewSkelton';
 
 // ==========================================
 // 1. Data Type Definitions
@@ -19,6 +22,8 @@ interface ReviewComponentProps {
 type StarKeyType = 5 | 4 | 3 | 2 | 1;
 
 const Review: React.FC<ReviewComponentProps> = ({ reviews }) => {
+    const { isLoading } = useProductLoading();
+
     // 1. Core metric totals fallbacks
     const totalReviews: number = reviews?.length || 0;
 
@@ -36,11 +41,19 @@ const Review: React.FC<ReviewComponentProps> = ({ reviews }) => {
     const totalSum: number = reviews?.reduce((sum: number, rev: ReviewData) => sum + (Number(rev.rate) || 0), 0) || 0;
     const averageRate: number = totalReviews > 0 ? totalSum / totalReviews : 0;
 
+    // ==========================================
+    // Skeleton Render Block
+    // ==========================================
+    if (isLoading) {
+        return (
+            <ReviewSkelton />
+        );
+    }
     return (
-        <div className="max-w-6xl mx-auto p-4 font-sans text-[#333333] flex flex-col md:flex-row gap-6 items-start">
+        <div className="max-w-6xl mx-auto font-sans text-[#333333] flex flex-col md:flex-row gap-6 items-start">
 
             {/* LEFT SIDE: SUMMARY OVERVIEW PANEL */}
-            <div className="w-full md:w-[35%] p-5">
+            <div className="w-full md:w-[35%]">
                 <div className="flex items-center gap-3 mb-4">
                     {/* Display dynamically formatted average rating */}
                     <span className="text-4xl font-bold tracking-tight">
@@ -126,7 +139,7 @@ const Review: React.FC<ReviewComponentProps> = ({ reviews }) => {
                                             <span className="text-xs font-bold text-neutral-800">{r.name}</span>
                                             <span className="text-[10px] text-neutral-400">{r.created_at}</span>
                                         </div>
-                                        {/* FIXED: Dynamic star display unique to each user's score rating */}
+                                        {/* Dynamic star display unique to each user's score rating */}
                                         <div className="flex text-[#ffb400] text-[11px] gap-0.5 select-none">
                                             {([1, 2, 3, 4, 5] as const).map((star: number) => (
                                                 reviewRate >= star ? (

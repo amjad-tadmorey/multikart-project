@@ -1,5 +1,4 @@
 import { RiArrowLeftRightLine, RiDiscountPercentFill, RiEye2Line, RiHeart2Line, RiShoppingCartLine } from '@remixicon/react';
-import React from 'react';
 
 const ProductCard = ({ product }: any) => {
     return (
@@ -25,16 +24,16 @@ const ProductCard = ({ product }: any) => {
 
                 {/* Curtain Slide Action Icons Stack */}
                 <div className="absolute right-4 top-4 flex flex-col gap-2 z-20 overflow-hidden pb-2">
-                    <button className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand transition duration-300 -translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 ease-out delay-[0ms]">
+                    <button className="flex h-6 w-6 above-mobile:h-9 above-mobile:w-9 items-center justify-center rounded-full bg-white text-brand transition duration-300 -translate-y-0 opacity-100 group-hover:translate-y-0 group-hover:opacity-100 above-mobile:translate-y-12 above-mobile:opacity-0 ease-out delay-[0ms]">
                         <RiHeart2Line size={15} />
                     </button>
-                    <button className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand transition duration-300 -translate-y-24 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 ease-out delay-50">
+                    <button className="flex h-6 w-6 above-mobile:h-9 above-mobile:w-9 items-center justify-center rounded-full bg-white text-brand transition duration-300 -translate-y-0 opacity-100 group-hover:translate-y-0 group-hover:opacity-100 above-mobile:translate-y-24 above-mobile:opacity-0 ease-out delay-50">
                         <RiEye2Line size={15} />
                     </button>
-                    <button className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand transition duration-300 -translate-y-36 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 ease-out delay-100">
+                    <button className="flex h-6 w-6 above-mobile:h-9 above-mobile:w-9 items-center justify-center rounded-full bg-white text-brand transition duration-300 -translate-y-0 opacity-100 group-hover:translate-y-0 group-hover:opacity-100 above-mobile:translate-y-36 above-mobile:opacity-0 ease-out delay-100">
                         <RiArrowLeftRightLine size={15} />
                     </button>
-                    <button className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand transition duration-300 -translate-y-50 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 ease-out delay-150">
+                    <button className="flex h-6 w-6 above-mobile:h-9 above-mobile:w-9 items-center justify-center rounded-full bg-white text-brand transition duration-300 -translate-y-0 opacity-100 group-hover:translate-y-0 group-hover:opacity-100 above-mobile:translate-y-50 above-mobile:opacity-0 ease-out delay-150">
                         <RiShoppingCartLine size={15} />
                     </button>
                 </div>

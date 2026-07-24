@@ -1,8 +1,17 @@
-import React from 'react'
+import { useProductLoading } from '@/context/ProductLoadingContext'
+import FAQSkeleton from '@/components/skeleton/FAQSkeleton'
 
 const FAQ = () => {
+    const { isLoading } = useProductLoading()
+
+    if (isLoading) {
+        return (
+            <FAQSkeleton />
+        )
+    }
+
     return (
-        <div className="max-w-6xl mx-auto p-6 bg-white font-sans text-[#333333]">
+        <div className="max-w-6xl mx-auto bg-white font-sans text-[#333333]">
 
             {/* TOP HEADER BAR */}
             <div className="flex items-center justify-between border-b border-neutral-100 pb-5 mb-6">

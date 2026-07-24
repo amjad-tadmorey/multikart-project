@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { RiArrowLeftSLine, RiArrowRightSLine, RiHeartLine, RiRefreshLine, RiShareLine } from '@remixicon/react'
+import { useProductLoading } from '@/context/ProductLoadingContext'
+import ProductVariantSkeleton from '@/components/skeleton/ProductVariantSkeleton'
 
 // ==========================================
 // 1. Core Data Interfaces
@@ -7,6 +9,7 @@ import { RiArrowLeftSLine, RiArrowRightSLine, RiHeartLine, RiRefreshLine, RiShar
 export interface SelectValue {
     id: number
     name: string
+    image?: string
 }
 
 export interface OptionValueContainer {
@@ -39,14 +42,12 @@ export interface OptionsCheckWrapper {
     options: CheckboxOption[]
 }
 
-// Component Prop Definitions
 interface ProductVariantsProps {
     options?: OptionsWrapper | null
     options_check?: OptionsCheckWrapper | null
-    basePrice: number // Passed from parent (e.g. sale_price)
+    basePrice: number
 }
 
-// State Interfacing
 interface SelectedOptionsState {
     [key: string]: string
 }
@@ -59,16 +60,15 @@ interface SelectedCheckboxesState {
 // 2. Component Logic
 // ==========================================
 const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_check, basePrice }) => {
-    // Direct data isolation array mapping
+    const { isLoading } = useProductLoading()
+
     const selectOptions: ProductOption[] = options?.options || []
     const checkboxOptions: CheckboxOption[] = options_check?.options || []
 
-    // Typed component states
     const [selectedOptions, setSelectedOptions] = useState<SelectedOptionsState>({})
     const [selectedCheckboxes, setSelectedCheckboxes] = useState<SelectedCheckboxesState>({})
     const [quantity, setQuantity] = useState<number>(1)
 
-    // Component functional mutation hooks
     const handleSelectChange = (optionName: string, valueId: string): void => {
         setSelectedOptions(prev => ({ ...prev, [optionName]: valueId }))
     }
@@ -81,10 +81,6 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_chec
         setQuantity(prev => Math.max(1, prev + amount))
     }
 
-    // ==========================================
-    // 3. Dynamic Price Calculation Logic
-    // ==========================================
-    // Calculate total cost of active checkbox add-ons
     const addonsTotal = checkboxOptions.reduce((sum, check) => {
         if (selectedCheckboxes[check.id]) {
             return sum + (Number(check.new_price) || 0)
@@ -92,49 +88,86 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_chec
         return sum
     }, 0)
 
-    // Calculate final price: (Base Price + Add-ons) * Quantity
     const totalPrice = (basePrice + addonsTotal) * quantity
 
+    // ==========================================
+    // Skeleton Render Block
+    // ==========================================
+    if (isLoading) {
+        return (
+            <ProductVariantSkeleton />
+        )
+    }
     return (
-        <div className="lg:sticky lg:top-10 space-y-6">
-            <div className="bg-white border border-neutral-100 p-6 font-sans flex flex-col items-center w-full max-w-md mx-auto">
+        <div className="lg:sticky lg:top-10 space-y-6 w-full max-w-md mx-auto">
+            <div className="bg-white border border-neutral-100 p-6 font-sans flex flex-col items-center w-full">
 
                 {/* Real-time Dynamic Price Display */}
                 <div className="text-center mb-6">
-                    <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
-                        Total Price
-                    </span>
-                    <span className="text-3xl font-black text-neutral-900">
-                        {totalPrice.toFixed(2)} $
-                    </span>
-                    {quantity > 1 && (
-                        <span className="block text-xs text-neutral-500 mt-1">
-                            {((basePrice + addonsTotal)).toFixed(2)} $ each
-                        </span>
-                    )}
+                    <span className="text-xs font-bold tracking-wider text-neutral-400 uppercase block mb-1">Estimated Total</span>
+                    <span className="text-3xl font-extrabold text-[#333333]">${totalPrice.toFixed(2)}</span>
                 </div>
 
-                {/* 1. Size & Color Dropdowns */}
+                {/* 1. Size & Color Image/Button Selectors */}
                 {selectOptions.map((option) => (
                     <div key={option.id} className="w-full text-center mb-4">
-                        <label className="block text-sm font-bold text-[#333333] mb-2 capitalize">
+                        <label className="block text-sm font-bold text-[#333333] mb-2 capitalize text-left lg:text-center">
                             {option.name}:
                         </label>
-                        <select
-                            className="w-full border border-neutral-200 p-2 text-sm text-neutral-700 bg-white rounded-sm focus:outline-none focus:border-neutral-400 block mx-auto"
-                            value={selectedOptions[option.name] || ''}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleSelectChange(option.name, e.target.value)}
-                        >
-                            <option value="">Select {option.name}</option>
-                            {option.option_values?.select_values?.map((val) => (
-                                <option key={val.id} value={val.id}>
-                                    {val.name}
-                                </option>
-                            ))}
-                        </select>
+
+                        {/* Flex container displaying interactive swatches */}
+                        <div className="flex flex-wrap items-center justify-center gap-3">
+                            {option.option_values?.select_values?.map((val) => {
+                                const isSelected = selectedOptions[option.name] === String(val.id);
+
+                                return (
+                                    <button
+                                        key={val.id}
+                                        type="button"
+                                        onClick={() => handleSelectChange(option.name, String(val.id))}
+                                        className={`relative flex items-center justify-center p-0.5 rounded-md border-2 transition-all overflow-hidden group cursor-pointer ${isSelected
+                                            ? 'border-[#ec8951] ring-1 ring-[#ec8951]'
+                                            : 'border-neutral-200 hover:border-neutral-400'
+                                            }`}
+                                    >
+                                        {/* If a variant image exists, show it; otherwise, show text name badge */}
+                                        {val.image ? (
+                                            <div className="relative w-12 h-12 bg-neutral-100 flex items-center justify-center">
+                                                <img
+                                                    src={val.image.startsWith('http') ? val.image : `https://etrolley.net${val.image}`}
+                                                    alt={val.name}
+                                                    className="w-full h-full object-cover"
+                                                    onError={(e) => {
+                                                        // Fallback if image fails to load
+                                                        e.currentTarget.style.display = 'none';
+                                                        if (e.currentTarget.nextElementSibling) {
+                                                            e.currentTarget.nextElementSibling.classList.remove('hidden');
+                                                        }
+                                                    }}
+                                                />
+                                                <span className="hidden absolute inset-0 flex items-center justify-center text-xs font-semibold px-2 py-1 text-neutral-800 bg-neutral-50 min-w-10">
+                                                    {val.name}
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <span className="text-xs font-semibold px-3 py-2 text-neutral-800 bg-neutral-50 min-w-10 block rounded-sm">
+                                                {val.name}
+                                            </span>
+                                        )}
+                                        {/* Checked checkmark indicator overlay on selected variations */}
+                                        {isSelected && (
+                                            <div className="absolute top-0 right-0 bg-[#ec8951] text-white p-0.5 rounded-bl-sm leading-none flex items-center justify-center">
+                                                <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            </div>
+                                        )}
+                                    </button>
+                                );
+                            })}
+                        </div>
                     </div>
                 ))}
-
                 {/* 2. Checkbox Add-ons */}
                 {checkboxOptions.map((check) => (
                     <div key={check.id} className="w-full flex justify-center items-center gap-2 mb-5">
@@ -197,17 +230,17 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_chec
                             <RiHeartLine size={16} /> Add To Wishlist
                         </div>
                         <div className="flex items-center gap-1.5 cursor-pointer hover:text-neutral-900">
-                            <RiRefreshLine size={16} /> Add To Compare
+                            <RiRefreshLine size={16} /> Compare
                         </div>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs font-medium text-neutral-600 cursor-pointer hover:text-neutral-900 mt-1">
-                        <RiShareLine size={16} /> Share
+                        <div className="flex items-center gap-1.5 cursor-pointer hover:text-neutral-900">
+                            <RiShareLine size={16} /> Share
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ProductVariants
+export default ProductVariants;

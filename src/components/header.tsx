@@ -18,9 +18,11 @@ import LeftSide from "./navigation/LeftSide";
 function MenuButton({
     onClick,
     ariaLabel,
+    color = "#000"
 }: {
     onClick: () => void;
     ariaLabel: string;
+    color: string
 }) {
     return (
         <button
@@ -32,8 +34,8 @@ function MenuButton({
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
+                fill={color}
+                stroke={color}
                 strokeWidth="2.5"
                 strokeLinecap="round"
             >
@@ -119,6 +121,7 @@ export default function Header() {
                         <MenuButton
                             onClick={() => setIsLeftOpen(true)}
                             ariaLabel="Open Categories"
+                            color="#000"
                         />
 
                         <Logo />
@@ -126,13 +129,15 @@ export default function Header() {
 
                     <Logo mobile />
 
-                    <DesktopMainNav />
 
-                    <div className="flex items-center gap-4 text-gray">
+                    <div className="flex items-center gap-6 text-gray">
+                        <DesktopMainNav />
                         <div className="special:hidden">
                             <MenuButton
                                 onClick={() => setIsRightOpen(true)}
                                 ariaLabel="Open Mobile Navigation"
+                                color="#ec8951"
+
                             />
                         </div>
 

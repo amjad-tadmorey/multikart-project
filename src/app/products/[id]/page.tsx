@@ -3,12 +3,16 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import { useEffect } from "react";
 
-import ImageGallery from "@/app/features/products/ImageGallery";
-import ProductsInfo from "@/app/features/products/ProductsInfo";
-import ProductVariants from "@/app/features/products/ProductVariants";
-import ProductDetails from "@/app/features/products/ProductDetails";
-import RelatedProducts from "@/app/features/products/RelatedProducts";
+// 1. Import your context
+import { useProductLoading } from "@/context/ProductLoadingContext";
+
+import ImageGallery from "@/features/products/ImageGallery";
+import ProductsInfo from "@/features/products/ProductsInfo";
+import ProductVariants from "@/features/products/ProductVariants";
+import ProductDetails from "@/features/products/ProductDetails";
+import RelatedProducts from "@/features/products/RelatedProducts";
 
 export const dynamic = "force-dynamic"
 
@@ -26,23 +30,48 @@ export default function ProductDetailPage() {
 
     // 2. Integrate TanStack Query
     const { data, isLoading, error } = useQuery({
-        queryKey: ["product"],
+        queryKey: ["product", id], // Added id here to ensure safe re-fetches between products
         queryFn: () => fetchProductById(id),
     });
 
+    // 2. Set the loader state using your context
+    const { setIsLoading } = useProductLoading();
+    useEffect(() => {
+        setIsLoading(isLoading);
+    }, [isLoading, setIsLoading]);
 
-    if (isLoading) return <p>Loading products...</p>;
     if (error) return <p>Error loading data.</p>;
+    // Safely pull from data.data by using fallback empty objects while loading
+    const productData = data?.data || {};
+    const rate = productData.rate || 0;
+    const reviews = productData.reviews || [];
+    const product = productData.product || {};
+    const options = productData.options || [];
+    const options_check = productData.options_check || [];
+    const imagesObj = productData.images || {};
+    const images = imagesObj.images || [];
+    const similar_products = productData.similar_products || [];
 
-    const { rate, reviews, product: { sale_price, name, description, sku, unit, quantity }, options, options_check, images: { images }, similar_products } = data.data
+    // Extract raw nested values with fallbacks
+    const sale_price = product.sale_price || 0;
+    const name = product.name || "";
+    const description = product.description || "";
+    const sku = product.sku || "";
+    const unit = product.unit || "";
+    const quantity = product.quantity || 0;
 
     return (
         <div className="max-w-7xl mx-auto">
             <div className="bg-lighter py-8">
-                <h1 className="text-3xl text-center font-md">Gym Coords Set</h1>
-                <p className="text-center text-gray font-semibold mt-2">Home / Product / Gym Coords Set</p>
+                <h1 className="text-2xl text-center font-[600]">
+                    {isLoading ? "Loading Product..." : name || "Gym Coords Set"}
+                </h1>
+                <p className="text-center text-gray font-semibold mt-2">
+                    Home / Product / {isLoading ? "..." : name || "Gym Coords Set"}
+                </p>
             </div>
-            <div className="px-2 md:px-20 space-y-6 mt-12">
+
+            <div className="px-6 md:px-20 space-y-6 mt-8">
                 <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-5 above-mobile:gap-10 items-start border-light">
 
                     {/* LEFT COLUMN: Takes up 2 out of 3 columns on desktop screens */}
@@ -51,7 +80,6 @@ export default function ProductDetailPage() {
                         <ImageGallery images={images} />
 
                         {/* B. Long Details block that forces this layout column to be taller than the gallery */}
-
                         <ProductsInfo
                             description={description}
                             name={name}
@@ -73,10 +101,10 @@ export default function ProductDetailPage() {
                     />
 
                 </section>
+
                 <ProductDetails reviews={reviews} />
                 <RelatedProducts similar_products={similar_products} />
             </div>
-
         </div>
     );
 }
