@@ -61,7 +61,7 @@ export default function ProductDetailPage() {
     const quantity = product.quantity || 0;
 
     return (
-        <div className="max-w-7xl mx-auto">
+        <>
             <div className="bg-lighter py-8">
                 <h1 className="text-2xl text-center font-[600]">
                     {isLoading ? "Loading Product..." : name || "Gym Coords Set"}
@@ -71,40 +71,45 @@ export default function ProductDetailPage() {
                 </p>
             </div>
 
-            <div className="px-6 md:px-20 space-y-6 mt-8">
-                <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-5 above-mobile:gap-10 items-start border-light">
+            <div className="max-w-7xl mx-auto bg-white">
 
-                    {/* LEFT COLUMN: Takes up 2 out of 3 columns on desktop screens */}
-                    <div className="lg:col-span-2 flex space-y-3 above-mobile:space-y-12 flex-col lg:flex-row">
 
-                        <ImageGallery images={images} />
+                <div className="px-6 md:px-20 space-y-6 mt-8 bg-white">
+                    <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-5 above-mobile:gap-10 items-start border-light">
 
-                        {/* B. Long Details block that forces this layout column to be taller than the gallery */}
-                        <ProductsInfo
-                            description={description}
-                            name={name}
-                            rate={rate}
-                            reviews={reviews}
-                            price={sale_price}
-                            sku={sku}
-                            unit={unit}
-                            quantity={quantity}
+                        {/* LEFT COLUMN: Takes up 2 out of 3 columns on desktop screens */}
+                        <div className="lg:col-span-2 flex space-y-3 above-mobile:space-y-12 flex-col lg:flex-row">
+
+                            <ImageGallery images={images} />
+
+                            {/* B. Long Details block that forces this layout column to be taller than the gallery */}
+                            <ProductsInfo
+                                description={description}
+                                name={name}
+                                rate={rate}
+                                reviews={reviews}
+                                price={sale_price}
+                                sku={sku}
+                                unit={unit}
+                                quantity={quantity}
+                            />
+
+                        </div>
+
+                        {/* RIGHT COLUMN: Pins itself 24px below viewport top and scrolls within parent track */}
+                        <ProductVariants
+                            options={options}
+                            options_check={options_check}
+                            basePrice={Number(sale_price)}
                         />
 
-                    </div>
+                    </section>
 
-                    {/* RIGHT COLUMN: Pins itself 24px below viewport top and scrolls within parent track */}
-                    <ProductVariants
-                        options={options}
-                        options_check={options_check}
-                        basePrice={Number(sale_price)}
-                    />
-
-                </section>
-
-                <ProductDetails reviews={reviews} />
-                <RelatedProducts similar_products={similar_products} />
+                    <ProductDetails reviews={reviews} />
+                    <RelatedProducts similar_products={similar_products} />
+                </div>
             </div>
-        </div>
+        </>
+
     );
 }

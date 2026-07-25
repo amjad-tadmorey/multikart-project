@@ -22,9 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // FIX: Added className="light" and style={{ colorScheme: "light" }}
     <Providers>
       <html lang="en" className={`${assignmentMontserrat.variable} light`} style={{ colorScheme: "light" }}>
-        <body className="flex min-h-screen flex-col bg-slate-50 pb-16 md:pb-0 overflow-x-hidden">
+        <body className="flex min-h-screen flex-col bg-slate-white pb-16 md:pb-0 overflow-x-hidden">
           <Header />
-          <main className="flex-1 w-full">{children}</main>
+          <main className="flex-1 w-full bg-white">
+            {children}
+          </main>
           <Footer />
           <ThumbNav />
           <PopupCard />
