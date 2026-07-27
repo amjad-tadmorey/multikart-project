@@ -27,7 +27,7 @@ const DesktopMainNav = () => {
                 </div>
 
                 <Link href="/" className="hover:text-brand transition-colors duration-500 flex items-center">Feature <RiArrowDownSLine className='font-extrabold' size={20} /></Link>
-                <div className="absolute top-24 left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
+                <div className="absolute top-6 left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
                     <div className="grid grid-cols-6 grid-rows-[180px_40px_auto] w-275 max-w-6xl bg-white border border-gray-100 shadow-md rounded-md p-8 gap-6 text-left">
                         {
                             MAIN_NAV.feature.map((main) => <div key={main.id} className={`${main.gridSpace} `}>
