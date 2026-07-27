@@ -1,12 +1,10 @@
 import { RiArrowLeftRightLine, RiQuestionnaireLine, RiStarFill, RiStarLine, RiTruckLine } from '@remixicon/react'
 import Accordion from '../../ui/Accordion'
-import { useProductLoading } from '@/context/ProductLoadingContext'
-import ProductInfoSkeleton from '@/components/skeleton/ProductInfoSkeleton'
 
 interface ProductInfoProps {
     name: string,
     rate: number,
-    reviews: string[],
+    reviews: object[],
     price: number,
     description: string,
     sku: string,
@@ -16,13 +14,6 @@ interface ProductInfoProps {
 
 const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quantity }: ProductInfoProps) => {
 
-    const { isLoading } = useProductLoading()
-
-    if (isLoading) {
-        return (
-            <ProductInfoSkeleton />
-        )
-    }
     return (
         <div className="w-full text-mid-gray bg-white font-sans antialiased pt-4 px-4 space-y-4">
 

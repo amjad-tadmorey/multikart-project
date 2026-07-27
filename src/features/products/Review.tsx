@@ -1,8 +1,5 @@
 import React from 'react';
 import { RiStarFill, RiStarLine } from '@remixicon/react';
-import { useProductLoading } from '@/context/ProductLoadingContext';
-import Skeleton from '@/components/skeleton/Skeleton';
-import ReviewSkelton from '@/components/skeleton/ReviewSkelton';
 
 // ==========================================
 // 1. Data Type Definitions
@@ -22,7 +19,6 @@ interface ReviewComponentProps {
 type StarKeyType = 5 | 4 | 3 | 2 | 1;
 
 const Review: React.FC<ReviewComponentProps> = ({ reviews }) => {
-    const { isLoading } = useProductLoading();
 
     // 1. Core metric totals fallbacks
     const totalReviews: number = reviews?.length || 0;
@@ -41,14 +37,7 @@ const Review: React.FC<ReviewComponentProps> = ({ reviews }) => {
     const totalSum: number = reviews?.reduce((sum: number, rev: ReviewData) => sum + (Number(rev.rate) || 0), 0) || 0;
     const averageRate: number = totalReviews > 0 ? totalSum / totalReviews : 0;
 
-    // ==========================================
-    // Skeleton Render Block
-    // ==========================================
-    if (isLoading) {
-        return (
-            <ReviewSkelton />
-        );
-    }
+
     return (
         <div className="max-w-6xl mx-auto font-sans text-[#333333] flex flex-col md:flex-row gap-6 items-start">
 

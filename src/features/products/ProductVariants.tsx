@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { RiArrowLeftSLine, RiArrowRightSLine, RiHeartLine, RiRefreshLine, RiShareLine } from '@remixicon/react'
-import { useProductLoading } from '@/context/ProductLoadingContext'
-import ProductVariantSkeleton from '@/components/skeleton/ProductVariantSkeleton'
 
 // ==========================================
 // 1. Core Data Interfaces
@@ -29,143 +27,92 @@ export interface OptionsWrapper {
     options: ProductOption[]
 }
 
-export interface CheckboxOption {
-    id: number
-    name: string
-    type: 'checkbox'
-    price: string | number
-    new_price: number
-    option_values: any[]
-}
+const ProductVariants: React.FC = () => {
 
-export interface OptionsCheckWrapper {
-    options: CheckboxOption[]
-}
-
-interface ProductVariantsProps {
-    options?: OptionsWrapper | null
-    options_check?: OptionsCheckWrapper | null
-    basePrice: number
-}
-
-interface SelectedOptionsState {
-    [key: string]: string
-}
-
-interface SelectedCheckboxesState {
-    [key: number]: boolean
-}
-
-// ==========================================
-// 2. Component Logic
-// ==========================================
-const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_check, basePrice }) => {
-    const { isLoading } = useProductLoading()
-
-    const selectOptions: ProductOption[] = options?.options || []
-    const checkboxOptions: CheckboxOption[] = options_check?.options || []
-
-    const [selectedOptions, setSelectedOptions] = useState<SelectedOptionsState>({})
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState<SelectedCheckboxesState>({})
-    const [quantity, setQuantity] = useState<number>(1)
-
-    const handleSelectChange = (optionName: string, valueId: string): void => {
-        setSelectedOptions(prev => ({ ...prev, [optionName]: valueId }))
-    }
-
-    const handleCheckboxChange = (checkboxId: number): void => {
-        setSelectedCheckboxes(prev => ({ ...prev, [checkboxId]: !prev[checkboxId] }))
-    }
-
-    const adjustQuantity = (amount: number): void => {
-        setQuantity(prev => Math.max(1, prev + amount))
-    }
-
-    const addonsTotal = checkboxOptions.reduce((sum, check) => {
-        if (selectedCheckboxes[check.id]) {
-            return sum + (Number(check.new_price) || 0)
-        }
-        return sum
-    }, 0)
-
-    const totalPrice = (basePrice + addonsTotal) * quantity
-
-    // ==========================================
-    // Skeleton Render Block
-    // ==========================================
-    if (isLoading) {
-        return (
-            <ProductVariantSkeleton />
-        )
-    }
     return (
         <div className="lg:sticky lg:top-10 space-y-6 w-full max-w-md mx-auto">
             <div className="bg-white border border-neutral-100 p-6 font-sans flex flex-col items-center w-full">
 
 
-                {selectOptions.slice(1, 2).map((option) => (
-                    <div key={option.id} className="w-full text-center mb-4">
-                        <label className="block text-sm font-bold text-[#333333] mb-2 capitalize text-left lg:text-center">
-                            {option.name}
-                        </label>
+                <div className="w-full text-center mb-4 flex items-center justify-center gap-2">
 
-                        <div className="flex flex-wrap items-center justify-center gap-3">
-                            {option.option_values?.select_values?.map((val) => {
-                                const isSelected = selectedOptions[option.name] === String(val.id);
+                    <button
+                        type="button"
+                        className={`relative flex items-center justify-center p-0.5 border border-light ring ring-brand transition-all overflow-hidden group cursor-pointer`}
+                    >
+                        <div className="relative w-18 h-18 bg-neutral-100 flex items-center justify-center">
+                            <img
+                                src={`/data-product-1-color-red.jpg`}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                    if (e.currentTarget.nextElementSibling) {
+                                        e.currentTarget.nextElementSibling.classList.remove('hidden');
+                                    }
+                                }}
+                            />
 
-                                return (
-                                    <button
-                                        key={val.id}
-                                        type="button"
-                                        onClick={() => handleSelectChange(option.name, String(val.id))}
-                                        className={`relative flex items-center justify-center p-0.5 border-2 transition-all overflow-hidden group cursor-pointer ${isSelected
-                                            ? 'border-[#ec8951] ring-[#ec8951]'
-                                            : 'border-neutral-200 hover:border-neutral-400'
-                                            }`}
-                                    >
-                                        {val.name ? (
-                                            <div className="relative w-18 h-18 bg-neutral-100 flex items-center justify-center">
-                                                <img
-                                                    src={`/data-product-1-color-${val.name}.jpg`}
-                                                    alt={val.name}
-                                                    className="w-full h-full object-cover"
-                                                    onError={(e) => {
-                                                        e.currentTarget.style.display = 'none';
-                                                        if (e.currentTarget.nextElementSibling) {
-                                                            e.currentTarget.nextElementSibling.classList.remove('hidden');
-                                                        }
-                                                    }}
-                                                />
-                                                <span className="hidden absolute inset-0 flex items-center justify-center text-xs font-semibold px-2 py-1 text-neutral-800 bg-neutral-50 min-w-10">
-                                                    {val.name}
-                                                </span>
-                                            </div>
-                                        ) : (
-                                            <span className="text-xs font-semibold px-3 py-2 text-neutral-800 bg-neutral-50 min-w-10 block rounded-sm">
-                                                {val.name}
-                                            </span>
-                                        )}
-                                    </button>
-                                );
-                            })}
                         </div>
-                    </div>
-                ))}
+
+                    </button>
+                    <button
+                        type="button"
+                        className={`relative flex items-center justify-center p-0.5 border border-light transition-all overflow-hidden group cursor-pointer`}
+                    >
+                        <div className="relative w-18 h-18 bg-neutral-100 flex items-center justify-center">
+                            <img
+                                src={`/data-product-1-color-red.jpg`}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                    if (e.currentTarget.nextElementSibling) {
+                                        e.currentTarget.nextElementSibling.classList.remove('hidden');
+                                    }
+                                }}
+                            />
+                            <span className="hidden absolute inset-0 flex items-center justify-center text-xs font-semibold px-2 py-1 text-neutral-800 bg-neutral-50 min-w-10">
+                                red
+                            </span>
+                        </div>
+
+                    </button>
+                    <button
+                        type="button"
+                        className={`relative flex items-center justify-center p-0.5 border border-light transition-all overflow-hidden group cursor-pointer`}
+                    >
+                        <div className="relative w-18 h-18 bg-neutral-100 flex items-center justify-center">
+                            <img
+                                src={`/data-product-1-color-red.jpg`}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                    if (e.currentTarget.nextElementSibling) {
+                                        e.currentTarget.nextElementSibling.classList.remove('hidden');
+                                    }
+                                }}
+                            />
+                            <span className="hidden absolute inset-0 flex items-center justify-center text-xs font-semibold px-2 py-1 text-neutral-800 bg-neutral-50 min-w-10">
+                                red
+                            </span>
+                        </div>
+
+                    </button>
+
+                </div>
+
 
                 <div className="flex items-center border border-neutral-200 mb-5 overflow-hidden bg-lighter py-1">
                     <button
                         type="button"
-                        onClick={() => adjustQuantity(-1)}
                         className="px-2 py-1 text-neutral-600 font-bold select-none cursor-pointer mx-2 bg-white shadow-sm hover:bg-neutral-50"
                     >
                         <RiArrowLeftSLine size={20} />
                     </button>
                     <span className="w-12 text-center text-sm text-neutral-800 py-2 select-none">
-                        {quantity}
+                        1
                     </span>
                     <button
                         type="button"
-                        onClick={() => adjustQuantity(1)}
                         className="px-2 py-1 text-neutral-600 font-bold select-none cursor-pointer mx-2 bg-white shadow-sm hover:bg-neutral-50"
                     >
                         <RiArrowRightSLine size={20} />

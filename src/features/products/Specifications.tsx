@@ -1,14 +1,6 @@
-import { useProductLoading } from '@/context/ProductLoadingContext'
-import SpecificationsSkeleton from '@/components/skeleton/SpecificationsSkeleton'
 
 const Specifications = () => {
-    const { isLoading } = useProductLoading()
 
-    if (isLoading) {
-        return (
-            <SpecificationsSkeleton />
-        )
-    }
 
     return (
         <div>

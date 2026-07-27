@@ -6,7 +6,6 @@ import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 // 1. Import your context
-import { useProductLoading } from "@/context/ProductLoadingContext";
 
 import ImageGallery from "@/features/products/ImageGallery";
 import ProductsInfo from "@/features/products/ProductsInfo";
@@ -28,37 +27,73 @@ export default function ProductDetailPage() {
     const params = useParams<{ id: string }>();
     const id = params.id;
 
-    // 2. Integrate TanStack Query
-    const { data, isLoading, error } = useQuery({
-        queryKey: ["product", id], // Added id here to ensure safe re-fetches between products
-        queryFn: () => fetchProductById(id),
-    });
 
-    // 2. Set the loader state using your context
-    const { setIsLoading } = useProductLoading();
-    useEffect(() => {
-        setIsLoading(isLoading);
-    }, [isLoading, setIsLoading]);
 
-    if (error) return <p>Error loading data.</p>;
-    // Safely pull from data.data by using fallback empty objects while loading
-    const productData = data?.data || {};
-    const rate = productData.rate || 0;
-    const reviews = productData.reviews || [];
-    const product = productData.product || {};
-    const options = productData.options || [];
-    const options_check = productData.options_check || [];
-    const imagesObj = productData.images || {};
-    const images = imagesObj.images || [];
-    const similar_products = productData.similar_products || [];
+    const images = [
+        {
+            id: 1,
+            src: "/data-product-1-1.jpg"
+        },
+        {
+            id: 2,
+            src: "/data-product-1-2.jpg"
+        },
+        {
+            id: 3,
+            src: "/data-product-1-3.jpg"
+        },
+        {
+            id: 4,
+            src: "/data-product-1-4.jpg"
+        },
+    ]
 
-    // Extract raw nested values with fallbacks
-    const sale_price = product.sale_price || 0;
-    const name = product.name || "";
-    const description = product.description || "";
-    const sku = product.sku || "";
-    const unit = product.unit || "";
-    const quantity = product.quantity || 0;
+    const product = {
+        name: "Gym Coords Set",
+        description: "Gym Coords Set' offers a complete workout ensemble for the modern fitness enthusiast. This coordinated set includes everything needed for a stylish and functional gym session, from moisture-wicking tops to supportive leggings, ensuring both comfort and performance during workouts.",
+        rate: 4,
+        reviews: [
+            {
+                id: 1,
+                name: "Alex Mercer",
+                rate: 5,
+                content: "Absolutely fantastic product! The quality exceeded my expectations, and shipping was incredibly fast. Highly recommend to everyone.",
+                created_at: "2026-07-25 14:32"
+            },
+            {
+                id: 2,
+                name: "Sarah Jenkins",
+                rate: 5,
+                content: "Perfect fit and beautiful design. It looks exactly like the photos on the website. Will definitely be buying more from this collection.",
+                created_at: "2026-07-22 09:15"
+            },
+            {
+                id: 3,
+                name: "David K.",
+                rate: 4,
+                content: "Very solid construction and operates smoothly. Knocked off one star only because the packaging was slightly dented upon delivery.",
+                created_at: "2026-07-18 18:45"
+            },
+            {
+                id: 4,
+                name: "Emily Watson",
+                rate: 3,
+                content: "It's decent for the price point, but the material feels a bit lighter than I expected. Fine for casual everyday use.",
+                created_at: "2026-07-12 11:20"
+            },
+            {
+                id: 5,
+                name: "Michael Chen",
+                rate: 2,
+                content: "The sizing runs much smaller than the chart indicates. Had to return it because it didn't fit properly. Disappointed.",
+                created_at: "2026-07-05 16:10"
+            }
+        ],
+        sale_price: 150.00,
+        sku: "123456",
+        unit: "item",
+        quantity: 0
+    }
 
     return (
         <>
@@ -84,29 +119,29 @@ export default function ProductDetailPage() {
 
                             {/* B. Long Details block that forces this layout column to be taller than the gallery */}
                             <ProductsInfo
-                                description={description}
-                                name={name}
-                                rate={rate}
-                                reviews={reviews}
-                                price={sale_price}
-                                sku={sku}
-                                unit={unit}
-                                quantity={quantity}
+                                description={product.description}
+                                name={product.name}
+                                rate={product.rate}
+                                reviews={product.reviews}
+                                price={product.sale_price}
+                                sku={product.sku}
+                                unit={product.unit}
+                                quantity={product.quantity}
                             />
 
                         </div>
 
                         {/* RIGHT COLUMN: Pins itself 24px below viewport top and scrolls within parent track */}
                         <ProductVariants
-                            options={options}
-                            options_check={options_check}
-                            basePrice={Number(sale_price)}
+                        // options={options}
+                        // options_check={options_check}
+                        // basePrice={Number(sale_price)}
                         />
 
                     </section>
 
-                    <ProductDetails reviews={reviews} />
-                    <RelatedProducts similar_products={similar_products} />
+                    <ProductDetails reviews={product.reviews} />
+                    <RelatedProducts />
                 </div>
             </section>
         </>

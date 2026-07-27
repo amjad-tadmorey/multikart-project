@@ -1,15 +1,7 @@
-import { useProductLoading } from '@/context/ProductLoadingContext'
-import FAQSkeleton from '@/components/skeleton/FAQSkeleton'
 import { RiThumbDownFill, RiThumbUpFill } from '@remixicon/react'
 
 const FAQ = () => {
-    const { isLoading } = useProductLoading()
 
-    if (isLoading) {
-        return (
-            <FAQSkeleton />
-        )
-    }
 
     return (
         <div className="max-w-6xl mx-auto bg-white font-sans text-[#333333]">
