@@ -74,7 +74,7 @@ export default function ProductDetailPage() {
             <div className="max-w-7xl mx-auto bg-white">
 
 
-                <div className="px-6 md:px-20 space-y-6 mt-8 bg-white">
+                <div className="px-6 md:px-20 space-y-6 mt-12 bg-white">
                     <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-5 above-mobile:gap-10 items-start border-light">
 
                         {/* LEFT COLUMN: Takes up 2 out of 3 columns on desktop screens */}
