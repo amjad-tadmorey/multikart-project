@@ -7,6 +7,7 @@ import ThumbNav from "@/components/ThumbNav";
 import PopupCard from "@/components/PopupCard";
 import ScrollToTop from "@/components/ScrollToTop"; // Import the client button safely
 import Providers from "./providers";
+import StickyAddToCartBar from "@/features/cart/StickyAddToCartBar";
 // //
 const assignmentMontserrat = Montserrat({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* Renders the client-side interactive component safely */}
           <ScrollToTop />
+          <StickyAddToCartBar />
         </body>
       </html>
     </Providers>
