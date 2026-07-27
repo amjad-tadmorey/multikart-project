@@ -13,6 +13,7 @@ import ProductsInfo from "@/features/products/ProductsInfo";
 import ProductVariants from "@/features/products/ProductVariants";
 import ProductDetails from "@/features/products/ProductDetails";
 import RelatedProducts from "@/features/products/RelatedProducts";
+import StickyAddToCartBar from "@/features/cart/StickyAddToCartBar";
 
 export const dynamic = "force-dynamic"
 
@@ -59,6 +60,7 @@ export default function ProductDetailPage() {
     const sku = product.sku || "";
     const unit = product.unit || "";
     const quantity = product.quantity || 0;
+
 
     return (
         <>
@@ -110,6 +112,7 @@ export default function ProductDetailPage() {
                     <RelatedProducts similar_products={similar_products} />
                 </div>
             </section>
+            <StickyAddToCartBar options={options.options} />
         </>
 
     );
