@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <ThumbNav />
           <PopupCard />
-          
+
           {/* Renders the client-side interactive component safely */}
           <ScrollToTop />
         </body>
