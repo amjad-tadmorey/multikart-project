@@ -62,9 +62,9 @@ export default function ProductDetailPage() {
 
     return (
         <>
-            <section className="bg-lighter py-7">
+            <section className="bg-lighter above-mobile:py-7 py-2">
                 <div className="container text-center">
-                    <h1 className="text-3xl font-medium tracking-wide">
+                    <h1 className="text-[1.3rem] above-mobile:text-3xl font-medium tracking-wide">
                         {"Gym Coords Set"}
                     </h1>
                     <p className="pt-2 text-sm font-semibold text-[#555]">
@@ -72,6 +72,7 @@ export default function ProductDetailPage() {
                     </p>
                 </div>
             </section>
+
 
             <section className="container mx-auto bg-white">
                 <div className="space-y-6 mt-12 bg-white">

@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ThumbNav from "@/components/ThumbNav";
 import PopupCard from "@/components/PopupCard";
+import ScrollToTop from "@/components/ScrollToTop"; // Import the client button safely
 import Providers from "./providers";
 
 const assignmentMontserrat = Montserrat({
@@ -19,10 +20,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // FIX: Added className="light" and style={{ colorScheme: "light" }}
     <Providers>
       <html lang="en" className={`${assignmentMontserrat.variable} light`} style={{ colorScheme: "light" }}>
-        <body className="flex min-h-screen flex-col pb-16 md:pb-0 overflow-x-hidden">
+        <body className="flex min-h-screen flex-col pb-16 md:pb-0 overflow-x-hidden relative">
           <Header />
           <main className="flex-1 w-full bg-white">
             {children}
@@ -30,6 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <ThumbNav />
           <PopupCard />
+          
+          {/* Renders the client-side interactive component safely */}
+          <ScrollToTop />
         </body>
       </html>
     </Providers>
