@@ -1,5 +1,6 @@
 import { useProductLoading } from '@/context/ProductLoadingContext'
 import FAQSkeleton from '@/components/skeleton/FAQSkeleton'
+import { RiThumbDownFill, RiThumbUpFill } from '@remixicon/react'
 
 const FAQ = () => {
     const { isLoading } = useProductLoading()
@@ -45,10 +46,10 @@ const FAQ = () => {
                         {/* Voting Thumbs */}
                         <div className="flex items-center gap-3 text-neutral-400 text-xs select-none shrink-0 pt-0.5">
                             <button type="button" className="flex items-center gap-1 hover:text-neutral-600">
-                                <span>👍</span> <span className="text-[10px]">0</span>
+                                <span><RiThumbUpFill size={16} /></span> <span className="text-[10px]">0</span>
                             </button>
                             <button type="button" className="flex items-center gap-1 hover:text-neutral-600">
-                                <span>👎</span> <span className="text-[10px]">0</span>
+                                <span><RiThumbDownFill size={16} /></span> <span className="text-[10px]">0</span>
                             </button>
                         </div>
                     </div>
@@ -80,10 +81,10 @@ const FAQ = () => {
                         {/* Voting Thumbs */}
                         <div className="flex items-center gap-3 text-neutral-400 text-xs select-none shrink-0 pt-0.5">
                             <button type="button" className="flex items-center gap-1 hover:text-neutral-600">
-                                <span>👍</span> <span className="text-[10px]">0</span>
+                                <span><RiThumbUpFill size={16} /></span> <span className="text-[10px]">0</span>
                             </button>
                             <button type="button" className="flex items-center gap-1 hover:text-neutral-600">
-                                <span>👎</span> <span className="text-[10px]">0</span>
+                                <span><RiThumbDownFill size={16} /></span> <span className="text-[10px]">0</span>
                             </button>
                         </div>
                     </div>
@@ -115,10 +116,10 @@ const FAQ = () => {
                         {/* Voting Thumbs */}
                         <div className="flex items-center gap-3 text-neutral-400 text-xs select-none shrink-0 pt-0.5">
                             <button type="button" className="flex items-center gap-1 hover:text-neutral-600">
-                                <span>👍</span> <span className="text-[10px]">0</span>
+                                <span><RiThumbUpFill size={16} /></span> <span className="text-[10px]">0</span>
                             </button>
                             <button type="button" className="flex items-center gap-1 hover:text-neutral-600">
-                                <span>👎</span> <span className="text-[10px]">0</span>
+                                <span><RiThumbDownFill size={16} /></span> <span className="text-[10px]">0</span>
                             </button>
                         </div>
                     </div>

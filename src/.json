@@ -1,0 +1,219 @@
+{
+    "code": 1,
+    "message": "product_found",
+    "data": {
+        "product": {
+            "id": 54277,
+            "quantity": -1,
+            "min_qnt": 1,
+            "max_qnt": null,
+            "category_name": "Dresses",
+            "buy_price": 150,
+            "sale_price": 150,
+            "offer_price": 120,
+            "discount": 0,
+            "note": "All Colors",
+            "is_offer": 0,
+            "name": "Gym Coords Set (Brown)",
+            "description": "All Colors \u003Capp-product-information\u003E\r\n\u003Cdiv class=\"bordered-box\"\u003E\r\n\u003Ch4 class=\"sub-title\"\u003Eproduct Info\u003C/h4\u003E\r\n\r\n\u003Cul class=\"shipping-info\"\u003E\r\n\t\u003Cli\u003E\u003Cspan\u003ESKU: \u003C/span\u003ESP18 (COPY)\u003C/li\u003E\r\n\t\u003Cli\u003E\u003Cspan\u003EUnit: \u003C/span\u003E1 Item\u003C/li\u003E\r\n\t\u003Cli\u003E\u003Cspan\u003EWeight: \u003C/span\u003E150 Gms\u003C/li\u003E\r\n\t\u003Cli\u003E\u003Cspan\u003EStock Status: \u003C/span\u003EIn stock\u003C/li\u003E\r\n\t\u003Cli\u003E\u003Cspan\u003EQuantity: \u003C/span\u003E40 Items Left\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003C/div\u003E\r\n\u003C/app-product-information\u003E",
+            "is_favorit": false,
+            "count_view": 1287,
+            "is_rate": false,
+            "offer_end": null,
+            "is_option": 0,
+            "brand_name": "cerave",
+            "brand_logo": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/brand/1695197693_1057399657.jpg",
+            "category": "Dresses",
+            "section": "Dresses",
+            "sku": "12345678",
+            "link": "etrolley.net/store/etrollymarket/product/54277/Gym Coords Set (Brown)",
+            "seo_title": "test",
+            "seo_description": "testt",
+            "seo_keyword": "testt",
+            "attrubites": [
+                {
+                    "name": "brand",
+                    "values": [
+                        {
+                            "id": 98,
+                            "name": "test"
+                        },
+                        {
+                            "id": 99,
+                            "name": "test2"
+                        },
+                        {
+                            "id": 100,
+                            "name": "test"
+                        },
+                        {
+                            "id": 101,
+                            "name": "test2"
+                        },
+                        {
+                            "id": 102,
+                            "name": "test"
+                        },
+                        {
+                            "id": 103,
+                            "name": "test2"
+                        },
+                        {
+                            "id": 104,
+                            "name": "test"
+                        },
+                        {
+                            "id": 105,
+                            "name": "test2"
+                        }
+                    ]
+                }
+            ],
+            "sub_description": "\r\n\r\nproduct Info\r\n\r\n\r\n\tSKU: SP18 (COPY)\r\n\tUnit: 1 Item\r\n\tWeight: 150 Gms\r\n\tStock Status: In stock...",
+            "instgram_link": "https://angular.pixelstrap.com/multikart-frontend/product/gym-coords-set",
+            "unit": "QAR",
+            "msg": "Hello, I want to inquire about the product:%20Name%20:%20Gym Coords Set (Brown)%20%20ID%20:%2033%20%20link:%20etrolley.net/store/etrollymarket/product/54277/Gym Coords Set (Brown)",
+            "range_price": {
+                "max_price": 150,
+                "min_price": 150
+            },
+            "jewelry": [],
+            "is_gift": 0
+        },
+        "product_informations": {
+            "product_informations": []
+        },
+        "options": {
+            "options": [
+                {
+                    "id": 1959,
+                    "name": "size",
+                    "type": "select",
+                    "price": null,
+                    "new_price": 0,
+                    "option_values": {
+                        "select_values": [
+                            {
+                                "id": 11140,
+                                "name": "L"
+                            },
+                            {
+                                "id": 11141,
+                                "name": "s"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": 1958,
+                    "name": "Color",
+                    "type": "select",
+                    "price": null,
+                    "new_price": 0,
+                    "option_values": {
+                        "select_values": [
+                            {
+                                "id": 11138,
+                                "name": "red"
+                            },
+                            {
+                                "id": 11139,
+                                "name": "WHITE"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "options_check": {
+            "options": [
+                {
+                    "id": 1960,
+                    "name": "With Letter",
+                    "type": "checkbox",
+                    "price": 60,
+                    "new_price": 60,
+                    "option_values": []
+                }
+            ]
+        },
+        "images": {
+            "images": [
+                {
+                    "id": 14409,
+                    "src": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/174628476_1777535186.webp",
+                    "thumbnail": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/174628476_1777535186.webp"
+                },
+                {
+                    "id": 14410,
+                    "src": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/2037342903_1777535186.webp",
+                    "thumbnail": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/2037342903_1777535186.webp"
+                },
+                {
+                    "id": 14411,
+                    "src": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/472088120_1777535187.webp",
+                    "thumbnail": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/472088120_1777535187.webp"
+                },
+                {
+                    "id": 14412,
+                    "src": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/445115062_1777535187.webp",
+                    "thumbnail": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/445115062_1777535187.webp"
+                },
+                {
+                    "id": 14413,
+                    "src": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/513249971_1777535187.webp",
+                    "thumbnail": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/513249971_1777535187.webp"
+                },
+                {
+                    "id": 14414,
+                    "src": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/1737630023_1777535188.webp",
+                    "thumbnail": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/1737630023_1777535188.webp"
+                },
+                {
+                    "id": 14415,
+                    "src": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/90488956_1777535188.webp",
+                    "thumbnail": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/90488956_1777535188.webp"
+                },
+                {
+                    "id": 14416,
+                    "src": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/2041946960_1777535189.webp",
+                    "thumbnail": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2026/04/2041946960_1777535189.webp"
+                }
+            ]
+        },
+        "rate": 0,
+        "count_rate": 0,
+        "count_sold": 0,
+        "similar_products": [
+            {
+                "id": 3956,
+                "name": "Blue Dress",
+                "image": "https://marketetrolly.s3.eu-north-1.amazonaws.com/media/118/product/2025/07/860601447_1753701240.webp",
+                "thump": "https://marketetrolly.s3.eu-north-1.amazonaws.com/thump/media/118/product/2025/07/860601447_1753701240.webp",
+                "qnt": 14,
+                "quantity": 14,
+                "min_qnt": 0,
+                "max_qnt": 0,
+                "is_option": 0,
+                "description": "فساتين صيفية",
+                "is_favorit": false,
+                "unit": "QAR",
+                "old_price": 200,
+                "new_price": 150,
+                "is_offer": false,
+                "discount": 0,
+                "rate": 0,
+                "count_views": 10,
+                "is_fetured": true,
+                "is_new": false,
+                "note": null,
+                "range_price": null,
+                "add_cart": 1,
+                "jewelry": []
+            }
+        ],
+        "tax": 0,
+        "is_limit": 1,
+        "reviews": []
+    }
+}

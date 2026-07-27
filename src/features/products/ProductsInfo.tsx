@@ -31,11 +31,11 @@ const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quan
                 <div className="flex items-center justify-center above-mobile:justify-baseline gap-2 text-sm font-medium">
                     {/* Infinite Line-drawing Zigzag Arrow SVG */}
                     <svg
-                        className="w-4 h-4 text-amber-500"
+                        className="w-8 h-8 p-0.5 text-amber-500"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        strokeWidth="2.5"
+                        strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                     >
@@ -44,12 +44,12 @@ const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quan
                             style={{
                                 strokeDasharray: 50,
                                 strokeDashoffset: 50,
-                                animation: 'drawArrowInfinite 2.5s ease-in-out infinite'
+                                animation: 'drawArrowInfinite 1.5s ease-in-out infinite'
                             }}
                         />
                     </svg>
 
-                    <span className="text-gray text-sm above-mobile:text-md mb-2">
+                    <span className="text-gray text-sm above-mobile:text-lg mb-2">
                         Selling fast! 4 people have this in their carts
                     </span>
                 </div>
@@ -57,7 +57,7 @@ const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quan
 
                 {/* Main Headings */}
                 <div className="space-y-1">
-                    <h1 className="text-lg above-mobile:text-[24px] font-bold text-[#333333] leading-tight tracking-tight">
+                    <h1 className="text-lg above-mobile:text-4xl tracking-wide leading-10 mb-2 font-bold text-[#333333]">
                         {name}
                     </h1>
                 </div>
@@ -85,7 +85,7 @@ const ProductsInfo = ({ name, rate, reviews, price, description, sku, unit, quan
             <div className="space-y-0.5 pt-1 text-center lg:text-start">
                 <div className="text-[22px] font-semibold text-[#ec8951]">
                     <span className="text-neutral-400 mr-1.5 text-lg"><span className="font-medium text-xl">MRP:</span></span>
-                    ${price}
+                    ${Number(price).toFixed(2)}
                 </div>
                 <div className="text-sm font-medium">
                     Inclusive all the text

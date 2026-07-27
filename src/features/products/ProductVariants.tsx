@@ -102,20 +102,13 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_chec
         <div className="lg:sticky lg:top-10 space-y-6 w-full max-w-md mx-auto">
             <div className="bg-white border border-neutral-100 p-6 font-sans flex flex-col items-center w-full">
 
-                {/* Real-time Dynamic Price Display */}
-                <div className="text-center mb-6">
-                    <span className="text-xs font-bold tracking-wider text-neutral-400 uppercase block mb-1">Estimated Total</span>
-                    <span className="text-3xl font-extrabold text-[#333333]">${totalPrice.toFixed(2)}</span>
-                </div>
 
-                {/* 1. Size & Color Image/Button Selectors */}
-                {selectOptions.map((option) => (
+                {selectOptions.slice(1, 2).map((option) => (
                     <div key={option.id} className="w-full text-center mb-4">
                         <label className="block text-sm font-bold text-[#333333] mb-2 capitalize text-left lg:text-center">
-                            {option.name}:
+                            {option.name}
                         </label>
 
-                        {/* Flex container displaying interactive swatches */}
                         <div className="flex flex-wrap items-center justify-center gap-3">
                             {option.option_values?.select_values?.map((val) => {
                                 const isSelected = selectedOptions[option.name] === String(val.id);
@@ -125,20 +118,18 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_chec
                                         key={val.id}
                                         type="button"
                                         onClick={() => handleSelectChange(option.name, String(val.id))}
-                                        className={`relative flex items-center justify-center p-0.5 rounded-md border-2 transition-all overflow-hidden group cursor-pointer ${isSelected
-                                            ? 'border-[#ec8951] ring-1 ring-[#ec8951]'
+                                        className={`relative flex items-center justify-center p-0.5 border-2 transition-all overflow-hidden group cursor-pointer ${isSelected
+                                            ? 'border-[#ec8951] ring-[#ec8951]'
                                             : 'border-neutral-200 hover:border-neutral-400'
                                             }`}
                                     >
-                                        {/* If a variant image exists, show it; otherwise, show text name badge */}
-                                        {val.image ? (
-                                            <div className="relative w-12 h-12 bg-neutral-100 flex items-center justify-center">
+                                        {val.name ? (
+                                            <div className="relative w-18 h-18 bg-neutral-100 flex items-center justify-center">
                                                 <img
-                                                    src={val.image.startsWith('http') ? val.image : `https://etrolley.net${val.image}`}
+                                                    src={`/data-product-1-color-${val.name}.jpg`}
                                                     alt={val.name}
                                                     className="w-full h-full object-cover"
                                                     onError={(e) => {
-                                                        // Fallback if image fails to load
                                                         e.currentTarget.style.display = 'none';
                                                         if (e.currentTarget.nextElementSibling) {
                                                             e.currentTarget.nextElementSibling.classList.remove('hidden');
@@ -154,52 +145,28 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_chec
                                                 {val.name}
                                             </span>
                                         )}
-                                        {/* Checked checkmark indicator overlay on selected variations */}
-                                        {isSelected && (
-                                            <div className="absolute top-0 right-0 bg-[#ec8951] text-white p-0.5 rounded-bl-sm leading-none flex items-center justify-center">
-                                                <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                                </svg>
-                                            </div>
-                                        )}
                                     </button>
                                 );
                             })}
                         </div>
                     </div>
                 ))}
-                {/* 2. Checkbox Add-ons */}
-                {checkboxOptions.map((check) => (
-                    <div key={check.id} className="w-full flex justify-center items-center gap-2 mb-5">
-                        <input
-                            type="checkbox"
-                            id={`check-${check.id}`}
-                            className="w-4 h-4 border-neutral-300 rounded accent-neutral-800 cursor-pointer"
-                            checked={!!selectedCheckboxes[check.id]}
-                            onChange={() => handleCheckboxChange(check.id)}
-                        />
-                        <label htmlFor={`check-${check.id}`} className="text-sm font-semibold text-neutral-700 cursor-pointer select-none">
-                            {check.name} {check.new_price > 0 && `(+${check.new_price} $)`}
-                        </label>
-                    </div>
-                ))}
 
-                {/* 3. Quantity Counter */}
-                <div className="flex items-center border border-neutral-200 mb-5 overflow-hidden bg-white py-2">
+                <div className="flex items-center border border-neutral-200 mb-5 overflow-hidden bg-lighter py-1">
                     <button
                         type="button"
                         onClick={() => adjustQuantity(-1)}
-                        className="px-4 py-2 text-neutral-600 font-bold select-none cursor-pointer mx-2 bg-white shadow-sm hover:bg-neutral-50"
+                        className="px-2 py-1 text-neutral-600 font-bold select-none cursor-pointer mx-2 bg-white shadow-sm hover:bg-neutral-50"
                     >
                         <RiArrowLeftSLine size={20} />
                     </button>
-                    <span className="w-12 text-center text-sm font-semibold text-neutral-800 py-2 select-none">
+                    <span className="w-12 text-center text-sm text-neutral-800 py-2 select-none">
                         {quantity}
                     </span>
                     <button
                         type="button"
                         onClick={() => adjustQuantity(1)}
-                        className="px-4 py-2 text-neutral-600 font-bold select-none cursor-pointer mx-2 bg-white shadow-sm hover:bg-neutral-50"
+                        className="px-2 py-1 text-neutral-600 font-bold select-none cursor-pointer mx-2 bg-white shadow-sm hover:bg-neutral-50"
                     >
                         <RiArrowRightSLine size={20} />
                     </button>
@@ -207,10 +174,10 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_chec
 
                 {/* 4. Action Buttons */}
                 <div className="flex items-center justify-center gap-4 w-full mb-4">
-                    <button type="button" className="bg-[#f0b293] hover:bg-[#e49f7e] transition-colors text-white font-bold py-2 px-4 text-sm text-center select-none cursor-pointer w-1/2">
-                        Add to Cart
+                    <button type="button" className="bg-[#f0b293] hover:bg-[#e49f7e] transition-colors text-white font-bold py-3 px-4 text-sm text-center select-none cursor-pointer w-1/2">
+                        Out Of Stock
                     </button>
-                    <button type="button" className="bg-[#f0b293] hover:bg-[#e49f7e] transition-colors text-white font-bold py-2 px-4 text-sm text-center select-none cursor-pointer w-1/2">
+                    <button type="button" className="bg-[#f0b293] hover:bg-[#e49f7e] transition-colors text-white font-bold py-3 px-4 text-sm text-center select-none cursor-pointer w-1/2">
                         Buy Now
                     </button>
                 </div>
@@ -224,15 +191,15 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({ options, options_chec
                 </div>
 
                 {/* 6. Utility Links */}
-                <div className="w-full border-t border-neutral-100 pt-4 flex flex-col gap-2 items-center text-sm">
-                    <div className="flex items-center justify-center gap-3 w-full font-medium text-neutral-600">
+                <div className="w-full border-t border-neutral-100 pt-4 flex flex-col gap-1 items-center text-xs">
+                    <div className="grid grid-cols-2 justify-center items-center gap-2 w-full font-light text-neutral-600">
                         <div className="flex items-center gap-1.5 cursor-pointer hover:text-neutral-900">
                             <RiHeartLine size={16} /> Add To Wishlist
                         </div>
                         <div className="flex items-center gap-1.5 cursor-pointer hover:text-neutral-900">
-                            <RiRefreshLine size={16} /> Compare
+                            <RiRefreshLine size={16} />Add To Compare
                         </div>
-                        <div className="flex items-center gap-1.5 cursor-pointer hover:text-neutral-900">
+                        <div className="flex gap-1.5 cursor-pointer hover:text-neutral-900 col-span-2 mx-auto">
                             <RiShareLine size={16} /> Share
                         </div>
                     </div>

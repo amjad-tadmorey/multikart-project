@@ -1,9 +1,50 @@
 @import "tailwindcss";
 
-/* FIX: Tell Tailwind v4 to look for a manual .dark class instead of system settings */
-@theme {
-  --variant-dark: .dark &;
+/* ==============================================================
+   SMOOTH, MINIMALIST LIGHT GRAY SCROLLBAR
+   ============================================================== */
+
+/* Native hardware-accelerated smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
 }
+
+/* 1. Chromium Browsers (Chrome, Edge, Safari, Next.js Webview) */
+::-webkit-scrollbar {
+  width: 6px;
+  /* Narrow width for a discrete look */
+  height: 6px;
+  /* Narrow height for horizontal tracks */
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+  /* Ultra-light gray track (matches your bg-slate-50 token) */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  /* Clean slate-300 light gray thumb color */
+  border-radius: 100px;
+  /* Pill-shaped rounded handle edges */
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+  /* Smoothly darkens to mid-gray when hovered */
+}
+
+/* 2. Firefox Engine Fallback */
+@supports (scrollbar-color: auto) {
+  html {
+    scrollbar-color: #cbd5e1 #f8fafc;
+    /* Light gray handle, ultra-light track */
+    scrollbar-width: thin;
+    /* Forces Firefox to use its thin engine */
+  }
+}
+
 
 :root {
   --background: #f8fafc;
@@ -47,15 +88,111 @@
   /* Breakpoints */
   --breakpoint-special: 1116px;
   --breakpoint-above-mobile: 578px;
-}
 
-/* FIX: Cleaned up duplicate @theme breakpoints block that was at the bottom */
+  /* ==========================================
+     CUSTOM TEXT SIZES (Tailwind v4 syntax)
+     Usage in HTML: text-xs, text-sm, text-base, text-xl, etc.
+     ========================================== */
+  --text-xs: 0.875rem;
+  /* 12px */
+  --text-sm: 0.875rem;
+  /* 14px */
+  --text-base: 1rem;
+  /* 16px */
+  --text-lg: 1rem;
+  /* 18px */
+  --text-xl: 1.25rem;
+  /* 20px */
+  --text-2xl: 1.5rem;
+  /* 24px */
+  --text-3xl: 1.6rem;
+  /* 30px */
+  --text-4xl: 1.8rem;
+
+
+  /* 36px */
+  /* Feel free to change these values or add custom ones like --text-hero: 4rem; */
+
+  /* ==========================================
+     CUSTOM FONT WEIGHTS (Tailwind v4 syntax)
+     Usage in HTML: font-light, font-normal, font-bold, etc.
+     ========================================== */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+}
 
 body {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
+  /* background-color: var(--background) !important; */
+  /* color: var(--foreground) !important; */
   font-family: var(--font-montserrat), sans-serif;
 }
+
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+@media (min-width: 576px) {
+
+  .container,
+  .container-sm {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .container,
+  .container-md,
+  .container-sm {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    max-width: 960px;
+  }
+}
+
+
+
+
+@media (min-width: 1200px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1140px;
+  }
+}
+
+
+
+
+
 
 .parent:hover .anime {
   animation: marqueeCustom 12s linear infinite;
@@ -64,15 +201,6 @@ body {
 .parent-link:hover .sub-link {
   opacity: 1;
 }
-
-
-
-@theme {
-  /* This creates a custom prefix breakpoint called "special:" */
-  --breakpoint-special: 1116px;
-  --breakpoint-above-mobile: 578px;
-}
-
 
 /* 1. Base loading styles applied automatically by JavaScript */
 img.img-loading {

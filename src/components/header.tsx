@@ -31,12 +31,12 @@ function MenuButton({
             className="p-1 cursor-pointer transition-colors duration-300 hover:text-brand"
         >
             <svg
-                width="24"
-                height="24"
+                width="28"
+                height="28"
                 viewBox="0 0 24 24"
                 fill={color}
                 stroke={color}
-                strokeWidth="2.5"
+                strokeWidth="1.5"
                 strokeLinecap="round"
             >
                 <line x1="3" y1="4" x2="10" y2="4" />
@@ -85,38 +85,40 @@ export default function Header() {
 
     return (
         <>
-            <header className="relative z-40 w-full bg-white/80 shadow-sm backdrop-blur-md">
+            <header className="relative z-40 w-full">
                 {/* Top Bar */}
-                <div className="hidden above-mobile:flex items-center justify-between bg-dark px-4 md:px-30 text-sm text-light">
-                    <div className="flex items-center">
-                        <p className="hidden sm:block py-2.5 pr-6">
-                            Welcome to Our Store Multikart
-                        </p>
+                <div className=" bg-dark">
+                    <div className="hidden container above-mobile:flex items-center justify-between text-sm text-light">
+                        <div className="flex items-center">
+                            <p className="hidden sm:block py-2.5 pr-6">
+                                Welcome to Our Store Multikart
+                            </p>
 
-                        <p className="flex items-center py-2.5">
-                            <RiPhoneFill
+                            <p className="flex items-center py-2.5">
+                                <RiPhoneFill
+                                    size={16}
+                                    className="mr-2 shrink-0 text-brand"
+                                />
+                                Call Us: 123 - 456 - 7890
+                            </p>
+                        </div>
+
+                        <div className="flex items-center">
+                            <RiHeartFill
                                 size={16}
-                                className="mr-2 shrink-0 text-brand"
+                                className="cursor-pointer transition-transform duration-300 hover:scale-110"
                             />
-                            Call Us: 123 - 456 - 7890
-                        </p>
-                    </div>
 
-                    <div className="flex items-center">
-                        <RiHeartFill
-                            size={16}
-                            className="cursor-pointer transition-transform duration-300 hover:scale-110"
-                        />
-
-                        <p className="flex items-center gap-2 py-2.5 pl-8">
-                            <RiUser3Fill size={16} />
-                            My Account
-                        </p>
+                            <p className="flex items-center gap-2 py-2.5 pl-8">
+                                <RiUser3Fill size={16} />
+                                My Account
+                            </p>
+                        </div>
                     </div>
                 </div>
 
                 {/* Main Header */}
-                <div className="mx-auto flex max-w-6xl items-center justify-between gap-8 px-4 py-4 above-mobile:py-8">
+                <div className="mx-auto container flex items-center justify-between gap-8 px-4 py-4 above-mobile:py-8 bg-white">
                     <div className="flex items-center gap-6">
                         <MenuButton
                             onClick={() => setIsLeftOpen(true)}
@@ -132,20 +134,23 @@ export default function Header() {
 
                     <div className="flex items-center gap-6 text-gray">
                         <DesktopMainNav />
-                        <div className="special:hidden">
-                            <MenuButton
-                                onClick={() => setIsRightOpen(true)}
-                                ariaLabel="Open Mobile Navigation"
-                                color="#ec8951"
 
-                            />
+                        <div className="flex items-center gap-6 ml-6">
+                            <div className="special:hidden">
+                                <MenuButton
+                                    onClick={() => setIsRightOpen(true)}
+                                    ariaLabel="Open Mobile Navigation"
+                                    color="#ec8951"
+
+                                />
+                            </div>
+
+                            <RiSearchLine className="hidden cursor-pointer transition-colors duration-300 hover:text-brand above-mobile:block" />
+
+                            <RiEqualizer2Line className="hidden cursor-pointer transition-colors duration-300 hover:text-brand above-mobile:block" />
+
+                            <RiShoppingCartLine className="hidden cursor-pointer transition-colors duration-300 hover:text-brand above-mobile:block" />
                         </div>
-
-                        <RiSearchLine className="hidden cursor-pointer transition-colors duration-300 hover:text-brand above-mobile:block" />
-
-                        <RiEqualizer2Line className="hidden cursor-pointer transition-colors duration-300 hover:text-brand above-mobile:block" />
-
-                        <RiShoppingCartLine className="hidden cursor-pointer transition-colors duration-300 hover:text-brand above-mobile:block" />
                     </div>
                 </div>
             </header>

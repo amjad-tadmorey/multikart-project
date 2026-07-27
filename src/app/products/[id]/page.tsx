@@ -62,20 +62,20 @@ export default function ProductDetailPage() {
 
     return (
         <>
-            <div className="bg-lighter py-8">
-                <h1 className="text-2xl text-center font-[600]">
-                    {isLoading ? "Loading Product..." : name || "Gym Coords Set"}
-                </h1>
-                <p className="text-center text-gray font-semibold mt-2">
-                    Home / Product / {isLoading ? "..." : name || "Gym Coords Set"}
-                </p>
-            </div>
+            <section className="bg-lighter py-7">
+                <div className="container text-center">
+                    <h1 className="text-3xl font-medium tracking-wide">
+                        {"Gym Coords Set"}
+                    </h1>
+                    <p className="pt-2 text-sm font-semibold text-[#555]">
+                        <span>HOME</span>  <span className="pl-1"><span className="pr-1">/</span> PRODUCT</span>  <span className="pl-1"><span className="pr-1">/</span> GYM COORDS SET</span>
+                    </p>
+                </div>
+            </section>
 
-            <div className="max-w-7xl mx-auto bg-white">
-
-
-                <div className="px-6 md:px-20 space-y-6 mt-12 bg-white">
-                    <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-5 above-mobile:gap-10 items-start border-light">
+            <section className="container mx-auto bg-white">
+                <div className="space-y-6 mt-12 bg-white">
+                    <section className="relative bg-white grid grid-cols-1 lg:grid-cols-3 gap-5 above-mobile:gap-8 items-start border-light">
 
                         {/* LEFT COLUMN: Takes up 2 out of 3 columns on desktop screens */}
                         <div className="lg:col-span-2 flex space-y-3 above-mobile:space-y-12 flex-col lg:flex-row">
@@ -108,7 +108,7 @@ export default function ProductDetailPage() {
                     <ProductDetails reviews={reviews} />
                     <RelatedProducts similar_products={similar_products} />
                 </div>
-            </div>
+            </section>
         </>
 
     );
