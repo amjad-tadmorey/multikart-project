@@ -28,7 +28,7 @@ const MobileMainNav: React.FC<MobileMainNaveProps> = ({ isRightOpen, setIsRightO
     };
 
     return (
-        <aside className={`fixed top-0 right-0 h-screen w-80 bg-white shadow-2xl z-50 transform transition-transform duration-500 ease-in-out p-6 overflow-y-auto ${isRightOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <aside className={`fixed top-0 right-0 h-screen w-80 bg-white shadow-md z-50 transform transition-transform duration-500 ease-in-out p-6 overflow-y-auto ${isRightOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             {/* Header Title Area */}
             <div className="flex items-center justify-between pb-6 border-b border-gray-100">
                 <h2 className="font-bold text-lg text-dark">Menu</h2>
