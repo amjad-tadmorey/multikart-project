@@ -7,6 +7,7 @@ import ThumbNav from "@/components/ThumbNav";
 import PopupCard from "@/components/PopupCard";
 import ScrollToTop from "@/components/ScrollToTop"; // Import the client button safely
 import Providers from "./providers";
+// //
 
 const assignmentMontserrat = Montserrat({
   subsets: ["latin"],
